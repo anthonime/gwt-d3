@@ -19,7 +19,9 @@
 
 	<!-- this is for the release plugin -->
 	<scm>
-		<developerConnection>scm:svn:https://gwt-d3.googlecode.com/svn/trunk/gwt-d3</developerConnection>
+		<url>https://github.com/anthonime/gwt-d3</url>
+		<connection>scm:git:ssh://git@github.com/anthonime/gwt-d3.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/anthonime/gwt-d3.git</developerConnection>
 	</scm>
 
 	<build>
