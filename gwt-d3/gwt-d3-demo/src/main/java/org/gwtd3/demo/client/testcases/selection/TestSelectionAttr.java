@@ -4,10 +4,13 @@ import org.gwtd3.api.D3;
 import org.gwtd3.api.core.Datum;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.functions.DatumFunction;
+import org.gwtd3.api.svg.Arc;
 import org.gwtd3.api.svg.PathDataGenerator;
+import org.gwtd3.demo.client.test.AbstractTestCase;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
