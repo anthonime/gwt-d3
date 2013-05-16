@@ -17,6 +17,7 @@ public class SVGD3Widget extends D3Widget {
 
 	protected final Selection svg;
 	protected final Selection g;
+	private Selection defsSelection;
 
 	/**
 	 * 
@@ -67,4 +68,23 @@ public class SVGD3Widget extends D3Widget {
 		g.attr("transform", "translate(" + x + "," + y + ")");
 	}
 
+	/**
+	 * @return a D3 selection representing the &lt;defs&gt; element.
+	 */
+	public Selection defs() {
+		if (defsSelection == null) {
+			defsSelection = svg.prepend("defs");
+		}
+		return defsSelection;
+	}
+
+	/**
+	 * Find an element with the given id in the &lt;defs&gt; element
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Selection getDefById(final String id) {
+		return defs().select("#" + id);
+	}
 }

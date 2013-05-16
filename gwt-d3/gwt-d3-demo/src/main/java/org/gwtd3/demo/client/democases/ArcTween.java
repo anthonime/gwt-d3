@@ -134,7 +134,7 @@ public class ArcTween extends FlowPanel implements DemoCase {
 						public String interpolate(final double t) {
 							double interpolated = interpolator.interpolate(t);
 							arcDatum.endAngle(interpolated);
-							return arc.apply(arcDatum);
+							return arc.generate(arcDatum);
 						}
 					};
 					return interp;

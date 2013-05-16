@@ -3,5 +3,10 @@
 /.classpath
 /.project
 /pom.xml.releaseBackup
+<<<<<<< HEAD
 /nbactions.xml
 /.gwt
+=======
+/.gwt
+/nbactions.xml
+>>>>>>> refs/remotes/origin/master

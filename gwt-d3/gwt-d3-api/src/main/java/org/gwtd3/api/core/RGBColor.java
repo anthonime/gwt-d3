@@ -3,8 +3,6 @@
  */
 package org.gwtd3.api.core;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
  * A color defined by red, green and blue components.
  * 
@@ -12,9 +10,10 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
  */
-public class RGBColor extends JavaScriptObject {
+public class RGBColor extends Color {
 
 	protected RGBColor() {
+		super();
 	}
 
 	/**
@@ -46,15 +45,6 @@ public class RGBColor extends JavaScriptObject {
 	 */
 	public native final HSLColor hsl()/*-{
 		return this.hsl();
-	}-*/;
-
-	/**
-	 * Converts to a RGB hexadecimal string, such as "#f7eaba".
-	 * 
-	 * @return hexa representation of the color
-	 */
-	public final native String toHexaString()/*-{
-		return this.toString();
 	}-*/;
 
 	/**

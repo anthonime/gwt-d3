@@ -11,7 +11,7 @@ import org.gwtd3.api.svg.PathDataGenerator;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.dom.client.BrowserEvents;
-import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.Element;
 
 /**
  * A selection is an array of elements pulled from the current document. D3 uses CSS3 to select elements. See {@link D3#select(String)} and
@@ -30,7 +30,7 @@ public class Selection extends EnteringSelection {
 	 * 
 	 * @return the first non-null element in the current selection or null if the selection is empty.
 	 */
-	public final native Node node()/*-{
+	public final native Element node()/*-{
 		return this.node();
 	}-*/;
 
@@ -394,6 +394,20 @@ public class Selection extends EnteringSelection {
 	}-*/;
 
 	/**
+	 * Same as {@link #on(String, DatumFunction, boolean)} with false for the useCapture flag.
+	 * 
+	 * @param eventType
+	 * @param listener
+	 * @return
+	 */
+	public native final Selection on(String eventType, DatumFunction<Void> listener) /*-{
+		listener == null ? null: function(d, i) {
+			listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
+		};
+		return this.on(eventType,l);
+	}-*/;
+
+	/**
 	 * Adds or removes an event listener to each element in the current selection, for the specified type.
 	 * <p>
 	 * The type is a string event type name, such as "click", "mouseover", or "submit". You may use {@link BrowserEvents} constants for convenience.
@@ -402,27 +416,32 @@ public class Selection extends EnteringSelection {
 	 * element.
 	 * <p>
 	 * To access the current event within a listener, use the global d3.event. The return value of the event listener is ignored.
-	 * 
+	 * <p>
 	 * If an event listener was already registered for the same type on the selected element, the existing listener is removed before the new listener is added. To register
 	 * multiple listeners for the same event type, the type may be followed by an optional namespace, such as "click.foo" and "click.bar".
-	 * 
+	 * <p>
 	 * To remove a listener, pass null as the listener. To remove all listeners for a particular event type, pass null as the listener, and .type as the type, e.g.
-	 * selection.on(".foo", null). An optional capture flag may be specified, which corresponds to the W3C useCapture flag:
-	 * "After initiating capture, all events of the specified type will be dispatched to the registered EventListener before being dispatched to any EventTargets beneath them in the tree. Events which are bubbling upward through the tree will not trigger an EventListener designated to use capture."
+	 * selection.on(".foo", null).
+	 * <p>
 	 * 
-	 * If listener is not specified, returns the currently-assigned listener for the specified type, if any.
 	 * 
 	 * @param eventType
+	 *            the type of the event to listen to; prefix the type with a dot to remove all listeners (specifying null as the second parameter).
 	 * @param listener
-	 * @return
+	 *            the listener to be added or to replace the previous one, or null to remove the previous listener(s)
+	 * @param useCapture
+	 *            a capture flag, which corresponds to the W3C useCapture flag: "After initiating capture, all events of the specified type will be dispatched to
+	 *            the registered EventListener before being dispatched to any EventTargets beneath them in the tree. Events which are bubbling upward through the tree will not
+	 *            trigger an
+	 *            EventListener designated to use capture."
+	 * @return the current selection
 	 */
-	public native final Selection on(String eventType, DatumFunction<Void> listener) /*-{
-		return this
-				.on(
-						eventType,
-						function(d, i) {
-							listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
-						});
+	public native final Selection on(String eventType, DatumFunction<Void> listener, boolean useCapture) /*-{
+		var l = (listener == null ? null
+				: function(d, i) {
+					listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
+				});
+		return this.on(eventType, l, useCapture);
 	}-*/;
 
 }

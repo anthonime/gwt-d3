@@ -1,6 +1,10 @@
-/.classpath
-/.project
+/.gwt
 /.settings
 /target
+<<<<<<< HEAD
 /pom.xml.releaseBackup
 /.gwt
+=======
+/.classpath
+/.project
+>>>>>>> refs/remotes/origin/master

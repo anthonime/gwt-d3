@@ -70,4 +70,13 @@ public class SVG extends JavaScriptObject {
 	public final native Chord chord() /*-{
 		return this.chord();
 	}-*/;
+
+	/**
+	 * Create a new default {@link Symbol}.
+	 * 
+	 * @return the symbol
+	 */
+	public final native Symbol symbol() /*-{
+		return this.symbol();
+	}-*/;
 }
