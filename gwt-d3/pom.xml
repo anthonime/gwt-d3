@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.gwtd3</groupId>
 	<artifactId>gwt-d3</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>gwt-d3 Parent project</name>
 
@@ -73,6 +73,5 @@
 			<url>dav:https://repository-anthonime.forge.cloudbees.com/release/</url>
 		</repository>
 	</distributionManagement>
-
-
+	
 </project>

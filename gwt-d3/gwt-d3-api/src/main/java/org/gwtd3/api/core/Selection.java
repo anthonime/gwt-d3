@@ -6,6 +6,7 @@ package org.gwtd3.api.core;
 import org.gwtd3.api.D3;
 import org.gwtd3.api.IsFunction;
 import org.gwtd3.api.functions.DatumFunction;
+import org.gwtd3.api.svg.PathDataGenerator;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
@@ -69,12 +70,13 @@ public class Selection extends EnteringSelection {
 	 * <p>
 	 * The specified name may have a namespace prefix, such as xlink:href, to specify an "href" attribute in the XLink namespace. By default, D3 supports svg, xhtml, xlink, xml,
 	 * and xmlns namespaces. Additional namespaces can be registered by adding to d3.ns.prefix.
+	 * <p>
 	 * 
 	 * @param name
 	 *            the name of the attribute
 	 * @return the value of the attribute
 	 */
-	public native final <T> T attr(final String name)
+	public native final String attr(final String name)
 	/*-{
 		return this.attr(name);
 	}-*/;
@@ -91,34 +93,47 @@ public class Selection extends EnteringSelection {
 	 *            the new value to assign
 	 * @return the current selection
 	 */
-	public native final <T> Selection attr(final String name, T value)
+	public native final <T> Selection attr(final String name, String value)
 	/*-{
 		return this.attr(name, value);
 	}-*/;
+	
+	/**
+	 * Sets the attribute with the specified name to the specified {@link PathDataGenerator} value on all selected elements.
+	 * <p>
+	 * This method should always been used with a selection containing a svg &lt;path&gt; element
+	 * by specifying "d" for the name argument. 
+	 * <p>
+	 * The specified name may have a namespace prefix, such as xlink:href, to specify an "href" attribute in the XLink namespace. By default, D3 supports svg, xhtml, xlink, xml,
+	 * and xmlns namespaces. Additional namespaces can be registered by adding to d3.ns.prefix.
+	 * <p>
+	 * 
+	 * @param name
+	 *            the name of the attribute
+	 * @param value
+	 *            the new value to assign
+	 * @return the current selection
+	 */
+	public native final Selection attr(final String name, PathDataGenerator value)
+	/*-{
+		return this.attr(name, value);
+	}-*/;
+	
 
 /**
-	 * See {@link #attr(String, Object).
+	 * See {@link #attr(String, String)}.
 	 * @param name
 	 * @param value
 	 * @return
 	 */
-	public native final <T> Selection attr(final String name, double value)
+	public native final Selection attr(final String name, double value)
 	/*-{
 	return this.attr(name, value);
 }-*/;
 
-/**
-	 * See {@link #attr(String, Object).
-	 * @param name
-	 * @param value
-	 * @return
-	 */
-	public native final <T> Selection attr(final String name, int value)/*-{
-	return this.attr(name, value);
-}-*/;
 
 /**
-	 * See {@link #attr(String, Object).
+	 * See {@link #attr(String, String)}.
 	 * @param name
 	 * @param value
 	 * @return

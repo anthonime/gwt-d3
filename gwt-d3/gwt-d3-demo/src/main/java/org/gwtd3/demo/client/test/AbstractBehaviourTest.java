@@ -13,15 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class AbstractBehaviourTest extends AbstractTestCase {
 
-	@SuppressWarnings("unchecked")
-	public <T extends Widget> T getWidget(final int index) {
-		return (T) sandbox.getWidget(index);
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T extends Element> T getElement(final int index) {
-		return (T) sandbox.getWidget(index).getElement();
-	}
 
 	/*
 	 * (non-Javadoc)

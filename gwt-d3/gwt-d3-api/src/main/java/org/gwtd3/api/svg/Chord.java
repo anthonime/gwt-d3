@@ -4,7 +4,7 @@ import org.gwtd3.api.IsFunction;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class Chord extends JavaScriptObject implements IsFunction {
+public class Chord extends PathDataGenerator {
 	protected Chord() {
 		super();
 	}
