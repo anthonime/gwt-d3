@@ -5,7 +5,7 @@ import org.gwtd3.api.functions.DatumFunction;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public class Area extends JavaScriptObject implements IsFunction {
+public class Area extends PathDataGenerator{
 
     protected Area() {
         super();

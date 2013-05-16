@@ -48,12 +48,32 @@ public abstract class PathDataGenerator extends JavaScriptObject implements IsFu
 	}
 
 	/**
-	 * Apply the function using the given object in argument. The object must contains valid attributes of an arc objects.
+	 * Generate the path data as String using the given data object in argument.
+	 * <p>
+	 * The data object must contains valid attributes for the corresponding generator to work (see each subclass documentation).
+	 * <p>
+	 * 
 	 * 
 	 * @param javaScriptObject
-	 * @return
+	 * @return the generated path data
 	 */
-	public final native String apply(JavaScriptObject javaScriptObject) /*-{
-		return this(javaScriptObject);
+	public final native String generate(JavaScriptObject data) /*-{
+		return this(data);
+	}-*/;
+
+	/**
+	 * Generate the path data as String using the given data object in argument.
+	 * <p>
+	 * The data object must contains valid attributes for the corresponding generator to work (see each subclass documentation).
+	 * <p>
+	 * 
+	 * 
+	 * @param javaScriptObject
+	 * @param index
+	 *            an index to be passed to each accessor functions
+	 * @return the generated path data
+	 */
+	public final native String generate(JavaScriptObject data, int index) /*-{
+		return this(data, index);
 	}-*/;
 }

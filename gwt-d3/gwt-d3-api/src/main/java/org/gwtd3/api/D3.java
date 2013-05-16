@@ -30,6 +30,7 @@ import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.UnsafeNativeLong;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Random;
@@ -408,7 +409,7 @@ public class D3 extends JavaScriptObject {
 	 * @param container
 	 * @return
 	 */
-	public static final native JsArrayNumber mouse(Element container)/*-{
+	public static final native JsArrayNumber mouse(Node container)/*-{
 		return $wnd.d3.mouse(container);
 	}-*/;
 
@@ -420,7 +421,7 @@ public class D3 extends JavaScriptObject {
 	 * @param container
 	 * @return
 	 */
-	public static final native double mouseX(Element container)/*-{
+	public static final native double mouseX(Node container)/*-{
 		return $wnd.d3.mouse(container)[0];
 	}-*/;
 
@@ -432,7 +433,7 @@ public class D3 extends JavaScriptObject {
 	 * @param container
 	 * @return
 	 */
-	public static final native double mouseY(Element container)/*-{
+	public static final native double mouseY(Node container)/*-{
 		return $wnd.d3.mouse(container)[1];
 	}-*/;
 

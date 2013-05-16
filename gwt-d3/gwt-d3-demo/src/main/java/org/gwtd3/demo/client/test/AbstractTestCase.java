@@ -5,7 +5,9 @@ package org.gwtd3.demo.client.test;
 
 import junit.framework.Assert;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
@@ -14,6 +16,21 @@ import com.google.gwt.user.client.ui.ComplexPanel;
 public abstract class AbstractTestCase extends Assert implements TestCase {
     protected ComplexPanel sandbox;
 
+	@SuppressWarnings("unchecked")
+	public <T extends Widget> T getWidget(final int index) {
+		return (T) sandbox.getWidget(index);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Element> T getElement(final int index) {
+		return (T) sandbox.getWidget(index).getElement();
+	}
+
+	public String getElementAttribute(final int index, final String attribute) {
+		return getElement(index).getAttribute(attribute);
+	}
+
+	
     /*
      * (non-Javadoc)
      * 
@@ -23,8 +40,13 @@ public abstract class AbstractTestCase extends Assert implements TestCase {
      */
     @Override
     public void tearDown(final ComplexPanel sandbox) {
-        sandbox.clear();
+        clearSandbox();
     }
+
+	protected void clearSandbox() {
+		sandbox.clear();
+		sandbox.getElement().setInnerHTML("");
+	}
 
     /*
      * (non-Javadoc)
