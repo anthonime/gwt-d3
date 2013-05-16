@@ -1,3 +1,5 @@
 /.gwt
 /.settings
 /target
+/.classpath
+/.project
