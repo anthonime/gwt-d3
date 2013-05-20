@@ -8,10 +8,11 @@
 	<inherits name='com.google.gwt.user.User' />
 
 	<inherits name='com.google.gwt.json.JSON' />
-
+	<inherits name="javax.validation.Validation" />
 	<!-- Specify the paths for translatable code -->
 	<source path='api' />
-	<!-- use Maven filter resources to change the deps to reduced code on prod time -->
+	<!-- use Maven filter resources to change the deps to reduced code on prod 
+		time -->
 	<!-- <script src="http://d3js.org/d3.v3.min.js"/> -->
 	<script src="http://d3js.org/d3.v3.js" />
 
