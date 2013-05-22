@@ -10,3 +10,6 @@
 /.gwt
 /nbactions.xml
 >>>>>>> refs/remotes/origin/master
+/.factorypath
+/pom.xml.next
+/pom.xml.tag

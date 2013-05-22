@@ -8,3 +8,7 @@
 /.classpath
 /.project
 >>>>>>> refs/remotes/origin/master
+/pom.xml.next
+/pom.xml.tag
+/release.properties
+/gwt-unitCache
