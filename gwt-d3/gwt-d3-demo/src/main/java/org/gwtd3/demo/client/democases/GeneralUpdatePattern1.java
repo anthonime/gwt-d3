@@ -9,7 +9,7 @@ import org.gwtd3.api.D3;
 import org.gwtd3.api.JsArrays;
 import org.gwtd3.api.core.Datum;
 import org.gwtd3.api.core.Selection;
-import org.gwtd3.api.core.UpdatingSelection;
+import org.gwtd3.api.core.UpdateSelection;
 import org.gwtd3.api.functions.DatumFunction;
 import org.gwtd3.demo.client.DemoCase;
 import org.gwtd3.demo.client.Factory;
@@ -95,7 +95,7 @@ public class GeneralUpdatePattern1 extends FlowPanel implements DemoCase {
 
         // DATA JOIN
         // Join new data with old elements, if any.
-        UpdatingSelection selection = svg.selectAll("text")
+        UpdateSelection selection = svg.selectAll("text")
                 .data(JsArrays.asJsArray(data));
 
         // UPDATE
