@@ -12,6 +12,7 @@ import org.gwtd3.demo.client.democases.GeneralUpdatePattern3;
 import org.gwtd3.demo.client.democases.StupidExample;
 import org.gwtd3.demo.client.democases.StupidExample2;
 import org.gwtd3.demo.client.democases.arcs.ArcDemo;
+import org.gwtd3.demo.client.democases.colors.ColorPalette;
 import org.gwtd3.demo.client.test.ui.TestRunner;
 import org.gwtd3.demo.client.test.ui.TestSessionContainer;
 import org.gwtd3.demo.client.testcases.D3TestSuite;
@@ -74,6 +75,7 @@ public class D3Demo implements EntryPoint {
 		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext.factory()));
 		buttonContainer.add(new DemoButton("Bar chart", BarChart.factory()));
 		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram.factory()));
+		buttonContainer.add(new DemoButton("Color Palette", ColorPalette.factory()));
 		p.add(buttonContainer);
 		container.addWest(p, 200);
 
@@ -105,7 +107,9 @@ public class D3Demo implements EntryPoint {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt .event.dom.client.ClickEvent)
+		 * @see
+		 * com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt
+		 * .event.dom.client.ClickEvent)
 		 */
 		@Override
 		public void onClick(final ClickEvent event) {
@@ -146,8 +150,7 @@ public class D3Demo implements EntryPoint {
 			currentDemo.stop();
 			demoContainer.remove(currentDemo);
 			currentDemo = null;
-		}
-		else if ((testContainer != null) && testContainer.getParent().equals(demoContainer)) {
+		} else if ((testContainer != null) && testContainer.getParent().equals(demoContainer)) {
 			demoContainer.remove(testContainer);
 		}
 
