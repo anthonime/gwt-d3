@@ -9,6 +9,8 @@
 	<inherits name='org.gwtd3.D3' />
 	<inherits name='com.google.gwt.junit.JUnit3' />
 	
+	<inherits name="javax.validation.Validation"/>
+	
 	<inherits name="com.google.gwt.debug.Debug"/>
 
 	<!-- Inherit the default GWT style sheet. You can change -->
