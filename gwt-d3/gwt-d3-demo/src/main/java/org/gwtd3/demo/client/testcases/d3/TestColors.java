@@ -19,7 +19,9 @@ public class TestColors extends AbstractTestCase {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.gwtd3.demo.client.tests.UnitTest#doTest(com.google.gwt.user.client.ui. RootPanel)
+	 * @see
+	 * org.gwtd3.demo.client.tests.UnitTest#doTest(com.google.gwt.user.client
+	 * .ui. RootPanel)
 	 */
 	@Override
 	public void doTest(final ComplexPanel sandbox) {
@@ -33,8 +35,8 @@ public class TestColors extends AbstractTestCase {
 	private void hsl() {
 		HSLColor hsl = D3.hsl("red");
 		assertEquals(0, hsl.h());
-		assertEquals(1, hsl.s());
-		assertEquals(0, hsl.l());
+		assertEquals(1.0, hsl.s());
+		assertEquals(0.5, hsl.l());
 		hsl = hsl.darker();
 		assertTrue(hsl.h() < 255);
 		hsl = hsl.brighter();
