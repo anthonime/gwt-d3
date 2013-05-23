@@ -1,5 +1,7 @@
 package org.gwtd3.api.arrays;
 
+import org.gwtd3.api.core.Value;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -72,7 +74,8 @@ public class Array<T> extends JavaScriptObject {
 	 * @param i3
 	 * @return the new array
 	 */
-	public static native final <R> Array<R> create(Object i1, Object i2, Object i3)/*-{
+	public static native final <R> Array<R> create(Object i1, Object i2,
+			Object i3)/*-{
 		return [ i1, i2, i3 ];
 	}-*/;
 
@@ -85,7 +88,8 @@ public class Array<T> extends JavaScriptObject {
 	 * @param i4
 	 * @return the new array
 	 */
-	public static native final <R> Array<R> create(Object i1, Object i2, Object i3, Object i4)/*-{
+	public static native final <R> Array<R> create(Object i1, Object i2,
+			Object i3, Object i4)/*-{
 		return [ i1, i2, i3, i4 ];
 	}-*/;
 
@@ -99,7 +103,8 @@ public class Array<T> extends JavaScriptObject {
 	 * @param i5
 	 * @return the new array
 	 */
-	public static native final <R> Array<R> create(Object i1, Object i2, Object i3, Object i4, Object i5)/*-{
+	public static native final <R> Array<R> create(Object i1, Object i2,
+			Object i3, Object i4, Object i5)/*-{
 		return [ i1, i2, i3, i4, i5 ];
 	}-*/;
 
@@ -114,6 +119,19 @@ public class Array<T> extends JavaScriptObject {
 	 */
 	public native final T get(int i) /*-{
 		return this[i];
+	}-*/;
+
+	/**
+	 * Return the element at the given index as a {@link Value} object.
+	 * 
+	 * @param i
+	 *            the index
+	 * @return the element as a Value
+	 */
+	public native final Value getValue(int i) /*-{
+		return {
+			datum : this[i]
+		};
 	}-*/;
 
 	/**
@@ -221,10 +239,11 @@ public class Array<T> extends JavaScriptObject {
 	// ============== indexOF methods ==============
 
 	/**
-	 * Search the array for the specified item, and returns its position,
-	 * or -1 of the item is not found.
+	 * Search the array for the specified item, and returns its position, or -1
+	 * of the item is not found.
 	 * <p>
-	 * The search will start at the index 0, and end the search at the end of the array. <br>
+	 * The search will start at the index 0, and end the search at the end of
+	 * the array. <br>
 	 * 
 	 * @param item
 	 *            the item to search for.
@@ -235,11 +254,13 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Search the array for the specified item, and returns its position,
-	 * or -1 of the item is not found.
+	 * Search the array for the specified item, and returns its position, or -1
+	 * of the item is not found.
 	 * <p>
-	 * The search will start at the specified position, and end the search at the end of the array. <br>
-	 * Negative values will start at the given position counting from the end, and search to the end.
+	 * The search will start at the specified position, and end the search at
+	 * the end of the array. <br>
+	 * Negative values will start at the given position counting from the end,
+	 * and search to the end.
 	 * 
 	 * @param item
 	 *            the item to search for.
@@ -252,10 +273,11 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Search the array for the specified item, and returns its position,
-	 * or -1 of the item is not found.
+	 * Search the array for the specified item, and returns its position, or -1
+	 * of the item is not found.
 	 * <p>
-	 * The search will start at the end of the array, and end the search at the beginning of the array. <br>
+	 * The search will start at the end of the array, and end the search at the
+	 * beginning of the array. <br>
 	 * 
 	 * @param item
 	 *            the item to search for.
@@ -266,11 +288,13 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Search the array for the specified item, and returns its position,
-	 * or -1 of the item is not found.
+	 * Search the array for the specified item, and returns its position, or -1
+	 * of the item is not found.
 	 * <p>
-	 * The search will start at the specified position, and end the search at the beginning of the array. <br>
-	 * Negative values will start at the given position counting from the end, and search to the beginning.
+	 * The search will start at the specified position, and end the search at
+	 * the beginning of the array. <br>
+	 * Negative values will start at the given position counting from the end,
+	 * and search to the beginning.
 	 * 
 	 * @param item
 	 *            the item to search for.
@@ -285,7 +309,8 @@ public class Array<T> extends JavaScriptObject {
 	// ============== concat methods ==============
 
 	/**
-	 * Return a new array containing the values of this array and the given array.
+	 * Return a new array containing the values of this array and the given
+	 * array.
 	 * 
 	 * @param array1
 	 * @return the new array
@@ -295,7 +320,8 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Return a new array containing the values of this array and the given array.
+	 * Return a new array containing the values of this array and the given
+	 * array.
 	 * 
 	 * @param array1
 	 * @param array2
@@ -306,19 +332,22 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Return a new array containing the values of this array and the given array.
+	 * Return a new array containing the values of this array and the given
+	 * array.
 	 * 
 	 * @param array1
 	 * @param array2
 	 * @param array3
 	 * @return
 	 */
-	public native final Array<?> concat(Array<?> array1, Array<?> array2, Array<?> array3)/*-{
+	public native final Array<?> concat(Array<?> array1, Array<?> array2,
+			Array<?> array3)/*-{
 		return this.concat(array1, array2, array3);
 	}-*/;
 
 	/**
-	 * Return a new array containing the values of this array and the given array.
+	 * Return a new array containing the values of this array and the given
+	 * array.
 	 * 
 	 * @param array1
 	 * @param array2
@@ -326,12 +355,14 @@ public class Array<T> extends JavaScriptObject {
 	 * @param array4
 	 * @return
 	 */
-	public native final Array<?> concat(Array<?> array1, Array<?> array2, Array<?> array3, Array<?> array4)/*-{
+	public native final Array<?> concat(Array<?> array1, Array<?> array2,
+			Array<?> array3, Array<?> array4)/*-{
 		return this.concat(array1, array2, array3, array4);
 	}-*/;
 
 	/**
-	 * Return a new array containing the values of this array and the given array.
+	 * Return a new array containing the values of this array and the given
+	 * array.
 	 * 
 	 * @param array1
 	 * @param array2
@@ -340,15 +371,17 @@ public class Array<T> extends JavaScriptObject {
 	 * @param array5
 	 * @return
 	 */
-	public native final Array<?> concat(Array<?> array1, Array<?> array2, Array<?> array3, Array<?> array4, Array<?> array5)/*-{
+	public native final Array<?> concat(Array<?> array1, Array<?> array2,
+			Array<?> array3, Array<?> array4, Array<?> array5)/*-{
 		return this.concat(array1, array2, array3, array4, array5);
 	}-*/;
 
 	// ============== iteration methods ==============
 
 	/**
-	 * Executes the provided callback once for each element of the array with an assigned value.
-	 * It is not invoked for indexes which have been deleted or which have been initialized to undefined.
+	 * Executes the provided callback once for each element of the array with an
+	 * assigned value. It is not invoked for indexes which have been deleted or
+	 * which have been initialized to undefined.
 	 * 
 	 * @param callback
 	 * @return this instance
@@ -361,13 +394,15 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Executes the provided callback once for each element of the array with an assigned value.
-	 * It is not invoked for indexes which have been deleted or which have been initialized to undefined.
+	 * Executes the provided callback once for each element of the array with an
+	 * assigned value. It is not invoked for indexes which have been deleted or
+	 * which have been initialized to undefined.
 	 * 
 	 * @param callback
 	 * @return this instance
 	 */
-	public native final void forEach(ForEachCallback<Void> callback, Object thisArg) /*-{
+	public native final void forEach(ForEachCallback<Void> callback,
+			Object thisArg) /*-{
 		this
 				.forEach(
 						function(element, index, array) {
@@ -377,16 +412,21 @@ public class Array<T> extends JavaScriptObject {
 
 	/**
 	 * 
-	 * Executes the provided callback function once for each element present in the array until it finds one where callback returns a falsy value.
-	 * If such an element is found, the every method immediately returns false.
-	 * Otherwise, if callback returned a true value for all elements, every will return true.
+	 * Executes the provided callback function once for each element present in
+	 * the array until it finds one where callback returns a falsy value. If
+	 * such an element is found, the every method immediately returns false.
+	 * Otherwise, if callback returned a true value for all elements, every will
+	 * return true.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
-	 * @return true if the callback returned true for all elements, false otherwise.
+	 * @return true if the callback returned true for all elements, false
+	 *         otherwise.
 	 */
 	public native final boolean every(ForEachCallback<Boolean> callback) /*-{
 		return this
@@ -399,20 +439,26 @@ public class Array<T> extends JavaScriptObject {
 
 	/**
 	 * 
-	 * Executes the provided callback function once for each element present in the array until it finds one where callback returns a falsy value.
-	 * If such an element is found, the every method immediately returns false.
-	 * Otherwise, if callback returned a true value for all elements, every will return true.
+	 * Executes the provided callback function once for each element present in
+	 * the array until it finds one where callback returns a falsy value. If
+	 * such an element is found, the every method immediately returns false.
+	 * Otherwise, if callback returned a true value for all elements, every will
+	 * return true.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
 	 * @param thisArg
 	 *            an argument to be passed to each callback invocations.
-	 * @return true if the callback returned true for all elements, false otherwise.
+	 * @return true if the callback returned true for all elements, false
+	 *         otherwise.
 	 */
-	public native final boolean every(ForEachCallback<Boolean> callback, Object thisArg) /*-{
+	public native final boolean every(ForEachCallback<Boolean> callback,
+			Object thisArg) /*-{
 		return this
 				.every(
 						function(element, index, array) {
@@ -424,16 +470,21 @@ public class Array<T> extends JavaScriptObject {
 
 	/**
 	 * 
-	 * Executes the provided callback function once for each element present in the array until it finds one where callback returns a falsy value.
-	 * If such an element is found, the every method immediately returns false.
-	 * Otherwise, if callback returned a true value for all elements, every will return true.
+	 * Executes the provided callback function once for each element present in
+	 * the array until it finds one where callback returns a falsy value. If
+	 * such an element is found, the every method immediately returns false.
+	 * Otherwise, if callback returned a true value for all elements, every will
+	 * return true.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
-	 * @return true if the callback returned true for all elements, false otherwise.
+	 * @return true if the callback returned true for all elements, false
+	 *         otherwise.
 	 */
 	public native final boolean some(ForEachCallback<Boolean> callback) /*-{
 		return this
@@ -445,20 +496,25 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Executes the provided callback function once for each element present in the array until it finds one where callback returns a true value.
-	 * If such an element is found, the method immediately returns true.
-	 * Otherwise, some will return false.
+	 * Executes the provided callback function once for each element present in
+	 * the array until it finds one where callback returns a true value. If such
+	 * an element is found, the method immediately returns true. Otherwise, some
+	 * will return false.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
 	 * @param thisArg
 	 *            an argument to be passed to each callback invocations.
-	 * @return true if the callback returned true for one element, false otherwise.
+	 * @return true if the callback returned true for one element, false
+	 *         otherwise.
 	 */
-	public native final boolean some(ForEachCallback<Boolean> callback, Object thisArg) /*-{
+	public native final boolean some(ForEachCallback<Boolean> callback,
+			Object thisArg) /*-{
 		return this
 				.some(
 						function(element, index, array) {
@@ -470,15 +526,19 @@ public class Array<T> extends JavaScriptObject {
 
 	/**
 	 * Calls the provided callback function once for each element in an array,
-	 * and constructs a new array of all the values for which callback returns a true value.
-	 * Array elements which do not pass the callback test are simply skipped, and are not included in the new array.
+	 * and constructs a new array of all the values for which callback returns a
+	 * true value. Array elements which do not pass the callback test are simply
+	 * skipped, and are not included in the new array.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
-	 * @return a new array containing only the element for which the callback returned true.
+	 * @return a new array containing only the element for which the callback
+	 *         returned true.
 	 */
 	public native final Array<T> filter(ForEachCallback<Boolean> callback) /*-{
 		return this
@@ -491,19 +551,24 @@ public class Array<T> extends JavaScriptObject {
 
 	/**
 	 * Calls the provided callback function once for each element in an array,
-	 * and constructs a new array of all the values for which callback returns a true value.
-	 * Array elements which do not pass the callback test are simply skipped, and are not included in the new array.
+	 * and constructs a new array of all the values for which callback returns a
+	 * true value. Array elements which do not pass the callback test are simply
+	 * skipped, and are not included in the new array.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
 	 *            the callback to be called for each element
 	 * @param thisArg
 	 *            an argument to be passed to each callback invocations.
-	 * @return a new array containing only the element for which the callback returned true.
+	 * @return a new array containing only the element for which the callback
+	 *         returned true.
 	 */
-	public native final Array<T> filter(ForEachCallback<Boolean> callback, Object thisArg) /*-{
+	public native final Array<T> filter(ForEachCallback<Boolean> callback,
+			Object thisArg) /*-{
 		return this
 				.filter(
 						function(element, index, array) {
@@ -517,7 +582,9 @@ public class Array<T> extends JavaScriptObject {
 	 * Calls the provided callback function once for each element in the array,
 	 * and constructs a new array of all the values returned by the callback.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
@@ -535,7 +602,9 @@ public class Array<T> extends JavaScriptObject {
 	 * Calls the provided callback function once for each element in the array,
 	 * and constructs a new array of all the values returned by the callback.
 	 * <p>
-	 * callback is invoked only for indexes of the array which have assigned values; it is not invoked for indexes which have been deleted or which have never been assigned values.
+	 * callback is invoked only for indexes of the array which have assigned
+	 * values; it is not invoked for indexes which have been deleted or which
+	 * have never been assigned values.
 	 * <p>
 	 * 
 	 * @param callback
@@ -544,7 +613,8 @@ public class Array<T> extends JavaScriptObject {
 	 *            an argument to be passed to each callback invocations.
 	 * @return a new array containing the elements returned by the callback
 	 */
-	public native final <R> Array<R> map(ForEachCallback<R> callback, Object thisArg) /*-{
+	public native final <R> Array<R> map(ForEachCallback<R> callback,
+			Object thisArg) /*-{
 		return this
 				.map(
 						function(element, index, array) {
@@ -646,7 +716,8 @@ public class Array<T> extends JavaScriptObject {
 	 * Sets the boolean value at a given index.
 	 * 
 	 * If the index is out of bounds, the value will still be set. The array's
-	 * length will be updated to encompass the bounds implied by the added value.
+	 * length will be updated to encompass the bounds implied by the added
+	 * value.
 	 * 
 	 * @param index
 	 *            the index to be set
@@ -661,7 +732,8 @@ public class Array<T> extends JavaScriptObject {
 	 * Sets the double value at a given index.
 	 * 
 	 * If the index is out of bounds, the value will still be set. The array's
-	 * length will be updated to encompass the bounds implied by the added value.
+	 * length will be updated to encompass the bounds implied by the added
+	 * value.
 	 * 
 	 * @param index
 	 *            the index to be set
@@ -676,7 +748,8 @@ public class Array<T> extends JavaScriptObject {
 	 * Sets the object value at a given index.
 	 * 
 	 * If the index is out of bounds, the value will still be set. The array's
-	 * length will be updated to encompass the bounds implied by the added object.
+	 * length will be updated to encompass the bounds implied by the added
+	 * object.
 	 * 
 	 * @param index
 	 *            the index to be set
@@ -691,7 +764,8 @@ public class Array<T> extends JavaScriptObject {
 	 * Sets the String value at a given index.
 	 * 
 	 * If the index is out of bounds, the value will still be set. The array's
-	 * length will be updated to encompass the bounds implied by the added String.
+	 * length will be updated to encompass the bounds implied by the added
+	 * String.
 	 * 
 	 * @param index
 	 *            the index to be set
@@ -796,9 +870,8 @@ public class Array<T> extends JavaScriptObject {
 	// ============== slice methods ==============
 
 	/**
-	 * Selects the elements starting at the given startIndex,
-	 * until the last element,
-	 * and return the selected elements in a new array.
+	 * Selects the elements starting at the given startIndex, until the last
+	 * element, and return the selected elements in a new array.
 	 * 
 	 * @param startIndex
 	 * @return the new array
@@ -808,9 +881,9 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Selects the elements starting at the given startIndex,
-	 * extending at the element just before the endIndex,
-	 * and return the selected elements in a new array.
+	 * Selects the elements starting at the given startIndex, extending at the
+	 * element just before the endIndex, and return the selected elements in a
+	 * new array.
 	 * 
 	 * @param startIndex
 	 * @param endIndex
@@ -868,7 +941,8 @@ public class Array<T> extends JavaScriptObject {
 	 * Remove count elements from startIndex.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @return the removed elements
@@ -878,27 +952,30 @@ public class Array<T> extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Remove count elements from startIndex,
-	 * and insert the given elements at this position.
+	 * Remove count elements from startIndex, and insert the given elements at
+	 * this position.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @param insert1
 	 *            element to insert
 	 * @return the removed elements
 	 */
-	public native final Array<T> splice(int startIndex, int count, Object insert1)/*-{
+	public native final Array<T> splice(int startIndex, int count,
+			Object insert1)/*-{
 		return this.splice(startIndex, count, insert1);
 	}-*/;
 
 	/**
-	 * Remove count elements from startIndex,
-	 * and insert the given elements at this position.
+	 * Remove count elements from startIndex, and insert the given elements at
+	 * this position.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @param insert1
@@ -908,16 +985,18 @@ public class Array<T> extends JavaScriptObject {
 	 * 
 	 * @return the removed elements
 	 */
-	public native final Array<T> splice(int startIndex, int count, Object insert1, Object insert2)/*-{
+	public native final Array<T> splice(int startIndex, int count,
+			Object insert1, Object insert2)/*-{
 		return this.splice(startIndex, count, insert1, insert2);
 	}-*/;
 
 	/**
-	 * Remove count elements from startIndex,
-	 * and insert the given elements at this position.
+	 * Remove count elements from startIndex, and insert the given elements at
+	 * this position.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @param insert1
@@ -929,16 +1008,18 @@ public class Array<T> extends JavaScriptObject {
 	 * 
 	 * @return the removed elements
 	 */
-	public native final Array<T> splice(int startIndex, int count, Object insert1, Object insert2, Object insert3)/*-{
+	public native final Array<T> splice(int startIndex, int count,
+			Object insert1, Object insert2, Object insert3)/*-{
 		return this.splice(startIndex, count, insert1, insert2, insert3);
 	}-*/;
 
 	/**
-	 * Remove count elements from startIndex,
-	 * and insert the given elements at this position.
+	 * Remove count elements from startIndex, and insert the given elements at
+	 * this position.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @param insert1
@@ -952,17 +1033,19 @@ public class Array<T> extends JavaScriptObject {
 	 * 
 	 * @return the removed elements
 	 */
-	public native final Array<T> splice(int startIndex, int count, Object insert1, Object insert2, Object insert3, Object insert4)/*-{
+	public native final Array<T> splice(int startIndex, int count,
+			Object insert1, Object insert2, Object insert3, Object insert4)/*-{
 		return this.splice(startIndex, count, insert1, insert2, insert3,
 				insert4);
 	}-*/;
 
 	/**
-	 * Remove count elements from startIndex,
-	 * and insert the given elements at this position.
+	 * Remove count elements from startIndex, and insert the given elements at
+	 * this position.
 	 * 
 	 * @param startIndex
-	 *            the index of the first element to be removed; negative values specify position from the end of the array
+	 *            the index of the first element to be removed; negative values
+	 *            specify position from the end of the array
 	 * @param count
 	 *            the number of elements to be removed
 	 * @param insert1
@@ -978,7 +1061,9 @@ public class Array<T> extends JavaScriptObject {
 	 * 
 	 * @return the removed elements
 	 */
-	public native final Array<T> splice(int startIndex, int count, Object insert1, Object insert2, Object insert3, Object insert4, Object insert5)/*-{
+	public native final Array<T> splice(int startIndex, int count,
+			Object insert1, Object insert2, Object insert3, Object insert4,
+			Object insert5)/*-{
 		return this.splice(startIndex, count, insert1, insert2, insert3,
 				insert4, insert5);
 	}-*/;
