@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.gwtd3.api.arrays.Array;
+import org.gwtd3.api.arrays.ForEachCallback;
+import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Color;
 import org.gwtd3.api.core.Format;
 import org.gwtd3.api.core.HSLColor;
@@ -57,7 +59,8 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class D3 extends JavaScriptObject {
 
-    protected D3() {}
+	protected D3() {
+	}
 
 	/**
 	 * @return the version of the d3 API
@@ -503,7 +506,10 @@ public class D3 extends JavaScriptObject {
 	 * function will instead be invoked with null.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvCallback<T> callback) /*-{
-		return $wnd.d3.csv(url, function(error, rows) {
+		return $wnd.d3
+				.csv(
+						url,
+						function(error, rows) {
 							callback.@org.gwtd3.api.dsv.DsvCallback::get(Lcom/google/gwt/core/client/JavaScriptObject;Lorg/gwtd3/api/dsv/DsvRows;)(error, rows);
 						});
 	}-*/;
@@ -522,9 +528,13 @@ public class D3 extends JavaScriptObject {
 	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvObjectAccessor<T> accessor, DsvCallback<T> callback)/*-{
-		return $wnd.d3.csv(url, function(row, index) {
+		return $wnd.d3
+				.csv(
+						url,
+						function(row, index) {
 							return accessor.@org.gwtd3.api.core.ObjectAccessor::apply(Ljava/lang/Object;I)(row, index);
-		}, function(error, rows) {
+						},
+						function(error, rows) {
 							callback.@org.gwtd3.api.dsv.DsvCallback::get(Lcom/google/gwt/core/client/JavaScriptObject;Lorg/gwtd3/api/dsv/DsvRows;)(error, rows);
 						});
 	}-*/;
@@ -543,7 +553,10 @@ public class D3 extends JavaScriptObject {
 	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvObjectAccessor<T> accessor)/*-{
-		return $wnd.d3.csv(url, function(row, index) {
+		return $wnd.d3
+				.csv(
+						url,
+						function(row, index) {
 							return accessor.@org.gwtd3.api.core.ObjectAccessor::apply(Ljava/lang/Object;I)(row, index);
 						});
 	}-*/;
@@ -581,7 +594,10 @@ public class D3 extends JavaScriptObject {
 	 * function will instead be invoked with null.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvCallback<T> callback) /*-{
-		return $wnd.d3.tsv(url, function(error, rows) {
+		return $wnd.d3
+				.tsv(
+						url,
+						function(error, rows) {
 							callback.@org.gwtd3.api.dsv.DsvCallback::get(Lcom/google/gwt/core/client/JavaScriptObject;Lorg/gwtd3/api/dsv/DsvRows;)(error, rows);
 						});
 	}-*/;
@@ -600,9 +616,13 @@ public class D3 extends JavaScriptObject {
 	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvObjectAccessor<T> accessor, DsvCallback<T> callback)/*-{
-		return $wnd.d3.tsv(url, function(row, index) {
+		return $wnd.d3
+				.tsv(
+						url,
+						function(row, index) {
 							return accessor.@org.gwtd3.api.core.ObjectAccessor::apply(Ljava/lang/Object;I)(row, index);
-		}, function(error, rows) {
+						},
+						function(error, rows) {
 							callback.@org.gwtd3.api.dsv.DsvCallback::get(Lcom/google/gwt/core/client/JavaScriptObject;Lorg/gwtd3/api/dsv/DsvRows;)(error, rows);
 						});
 	}-*/;
@@ -621,7 +641,10 @@ public class D3 extends JavaScriptObject {
 	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvObjectAccessor<T> accessor)/*-{
-		return $wnd.d3.tsv(url, function(row, index) {
+		return $wnd.d3
+				.tsv(
+						url,
+						function(row, index) {
 							return accessor.@org.gwtd3.api.core.ObjectAccessor::apply(Ljava/lang/Object;I)(row, index);
 						});
 	}-*/;
@@ -640,150 +663,191 @@ public class D3 extends JavaScriptObject {
 
 	// ============= math ============
 
-    /**
-     * Returns the maximum value in the given array using natural order.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#max}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * In addition, elements are compared using natural order rather than numeric order. For example, the maximum of
-     * ["20", "3"] is "3", while the maximum of [20, 3] is 20.
-     * 
-     * @param array the array to be evaluated
-     * @return the maximum as a {@link Value} object
-     */
-    public static final native Value max(JavaScriptObject array) /*-{
+	/**
+	 * Returns the maximum value in the given array using natural order.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#max}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * In addition, elements are compared using natural order rather than
+	 * numeric order. For example, the maximum of ["20", "3"] is "3", while the
+	 * maximum of [20, 3] is 20.
+	 * 
+	 * @param array
+	 *            the array to be evaluated
+	 * @return the maximum as a {@link Value} object
+	 */
+	public static final native Value max(JavaScriptObject array) /*-{
 		return {
 			datum : $wnd.d3.max(array)
 		};
-    }-*/;
+	}-*/;
 
-    /**
-     * Transform the values in the given array using the specified {@link ForEachCallback} and returns the maximum value
-     * in the transformed values using natural order. For example, the maximum of
-     * ["20", "3"] is "3", while the maximum of [20, 3] is 20. If you want to ensure the numeric order, please consider
-     * using {@link #max(JavaScriptObject, NumericForEachCallback)}.
-     * <p>
-     * The given {@link ForEachCallback} is equivalent to calling array.map(accessor) before computing the maximum
-     * value.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#max}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * 
-     * @param array the array to be transformed
-     * @param accessor the function used to convert each element in the original array to a transformed value
-     * @return the maximum of the transformed values as a {@link Value} object
-     */
-    public static final native Value max(JavaScriptObject array, ForEachCallback<?> accessor) /*-{
-		var rs = $wnd.d3.max(array, function(d, i, a) {
-			return accessor.@org.gwtd3.api.arrays.ForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
-		});
+	/**
+	 * Transform the values in the given array using the specified
+	 * {@link ForEachCallback} and returns the maximum value in the transformed
+	 * values using natural order. For example, the maximum of ["20", "3"] is
+	 * "3", while the maximum of [20, 3] is 20. If you want to ensure the
+	 * numeric order, please consider using
+	 * {@link #max(JavaScriptObject, NumericForEachCallback)}.
+	 * <p>
+	 * The given {@link ForEachCallback} is equivalent to calling
+	 * array.map(accessor) before computing the maximum value.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#max}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * 
+	 * @param array
+	 *            the array to be transformed
+	 * @param accessor
+	 *            the function used to convert each element in the original
+	 *            array to a transformed value
+	 * @return the maximum of the transformed values as a {@link Value} object
+	 */
+	public static final native Value max(JavaScriptObject array, ForEachCallback<?> accessor) /*-{
+		var rs = $wnd.d3
+				.max(
+						array,
+						function(d, i, a) {
+							return accessor.@org.gwtd3.api.arrays.ForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
+						});
 		return {
 			datum : rs
 		};
-    }-*/;
+	}-*/;
 
-    /**
-     * Transform the values in the given array using the specified {@link ForEachCallback} and returns the maximum value
-     * in the transformed values using natural order.
-     * <p>
-     * The given {@link NumericForEachCallback} is equivalent to calling array.map(accessor) before computing the
-     * maximum value.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#max}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * In addition, elements are compared using numeric order.
-     * 
-     * @param array the array to be transformed
-     * @param accessor the function used to convert each element in the original array to a transformed value
-     * @return the maximum of the transformed values as a {@link Value} object
-     */
-    public static final native Value max(JavaScriptObject array, NumericForEachCallback accessor) /*-{
-		var rs = $wnd.d3.max(array, function(d, i, a) {
-			return accessor.@org.gwtd3.api.arrays.NumericForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
-		});
+	/**
+	 * Transform the values in the given array using the specified
+	 * {@link ForEachCallback} and returns the maximum value in the transformed
+	 * values using natural order.
+	 * <p>
+	 * The given {@link NumericForEachCallback} is equivalent to calling
+	 * array.map(accessor) before computing the maximum value.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#max}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * In addition, elements are compared using numeric order.
+	 * 
+	 * @param array
+	 *            the array to be transformed
+	 * @param accessor
+	 *            the function used to convert each element in the original
+	 *            array to a transformed value
+	 * @return the maximum of the transformed values as a {@link Value} object
+	 */
+	public static final native Value max(JavaScriptObject array, NumericForEachCallback accessor) /*-{
+		var rs = $wnd.d3
+				.max(
+						array,
+						function(d, i, a) {
+							return accessor.@org.gwtd3.api.arrays.NumericForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
+						});
 		return {
 			datum : rs
 		};
-    }-*/;
+	}-*/;
 
-    /**
-     * Returns the minimum value in the given array using natural order.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#min}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * In addition, elements are compared using natural order rather than numeric order. For example, the minimum of
-     * ["20", "3"] is "20", while the minimum of [20, 3] is 3.
-     * 
-     * @param array the array to be evaluated
-     * @return the minimum as a {@link Value} object
-     */
-    public static final native Value min(JavaScriptObject array) /*-{
+	/**
+	 * Returns the minimum value in the given array using natural order.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#min}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * In addition, elements are compared using natural order rather than
+	 * numeric order. For example, the minimum of ["20", "3"] is "20", while the
+	 * minimum of [20, 3] is 3.
+	 * 
+	 * @param array
+	 *            the array to be evaluated
+	 * @return the minimum as a {@link Value} object
+	 */
+	public static final native Value min(JavaScriptObject array) /*-{
 		return {
 			datum : $wnd.d3.min(array)
 		};
-    }-*/;
+	}-*/;
 
-    /**
-     * Transform the values in the given array using the specified {@link ForEachCallback} and returns the minimum value
-     * in the transformed values using natural order. For example, the minimum of
-     * ["20", "3"] is "20", while the minimum of [20, 3] is 3. If you want to ensure the numeric order, please consider
-     * using {@link #max(JavaScriptObject, NumericForEachCallback)}.
-     * <p>
-     * The given {@link ForEachCallback} is equivalent to calling array.map(accessor) before computing the minimum
-     * value.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#min}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * In addition, elements are compared using natural order rather than numeric order.
-     * 
-     * @param array the array to be transformed
-     * @param accessor the function used to convert each element in the original array to a transformed value
-     * @return the minimum of the transformed values as a {@link Value} object
-     */
-    public static final native Value min(JavaScriptObject array, ForEachCallback<?> accessor) /*-{
-		var rs = $wnd.d3.min(array, function(d, i, a) {
-			return accessor.@org.gwtd3.api.arrays.ForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
-		});
+	/**
+	 * Transform the values in the given array using the specified
+	 * {@link ForEachCallback} and returns the minimum value in the transformed
+	 * values using natural order. For example, the minimum of ["20", "3"] is
+	 * "20", while the minimum of [20, 3] is 3. If you want to ensure the
+	 * numeric order, please consider using
+	 * {@link #max(JavaScriptObject, NumericForEachCallback)}.
+	 * <p>
+	 * The given {@link ForEachCallback} is equivalent to calling
+	 * array.map(accessor) before computing the minimum value.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#min}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * In addition, elements are compared using natural order rather than
+	 * numeric order.
+	 * 
+	 * @param array
+	 *            the array to be transformed
+	 * @param accessor
+	 *            the function used to convert each element in the original
+	 *            array to a transformed value
+	 * @return the minimum of the transformed values as a {@link Value} object
+	 */
+	public static final native Value min(JavaScriptObject array, ForEachCallback<?> accessor) /*-{
+		var rs = $wnd.d3
+				.min(
+						array,
+						function(d, i, a) {
+							return accessor.@org.gwtd3.api.arrays.ForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
+						});
 		return {
 			datum : rs
 		};
-    }-*/;
+	}-*/;
 
-    /**
-     * Transform the values in the given array using the specified {@link ForEachCallback} and returns the minimum value
-     * in the transformed values using numeric order.
-     * <p>
-     * The given {@link NumericForEachCallback} is equivalent to calling array.map(accessor) before computing the
-     * minimum value.
-     * <p>
-     * If the array is empty, returns undefined.
-     * <p>
-     * Unlike the built-in {@link Math#min}, this method ignores undefined values; this is useful for computing the
-     * domain of a scale while only considering the defined region of the data.
-     * <p>
-     * 
-     * @param array the array to be transformed
-     * @param accessor the function used to convert each element in the original array to a transformed value
-     * @return the minimum of the transformed values as a {@link Value} object
-     */
-    public static final native Value min(JavaScriptObject array, NumericForEachCallback accessor) /*-{
-		var rs = $wnd.d3.min(array, function(d, i, a) {
-			return accessor.@org.gwtd3.api.arrays.NumericForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
+	/**
+	 * Transform the values in the given array using the specified
+	 * {@link ForEachCallback} and returns the minimum value in the transformed
+	 * values using numeric order.
+	 * <p>
+	 * The given {@link NumericForEachCallback} is equivalent to calling
+	 * array.map(accessor) before computing the minimum value.
+	 * <p>
+	 * If the array is empty, returns undefined.
+	 * <p>
+	 * Unlike the built-in {@link Math#min}, this method ignores undefined
+	 * values; this is useful for computing the domain of a scale while only
+	 * considering the defined region of the data.
+	 * <p>
+	 * 
+	 * @param array
+	 *            the array to be transformed
+	 * @param accessor
+	 *            the function used to convert each element in the original
+	 *            array to a transformed value
+	 * @return the minimum of the transformed values as a {@link Value} object
+	 */
+	public static final native Value min(JavaScriptObject array, NumericForEachCallback accessor) /*-{
+		var rs = $wnd.d3
+				.min(
+						array,
+						function(d, i, a) {
+							return accessor.@org.gwtd3.api.arrays.NumericForEachCallback::forEach(Ljava/lang/Object;Lorg/gwtd3/api/core/Value;ILorg/gwtd3/api/arrays/Array;)(this,{datum:d},i,a);
 						});
 		return {
 			datum : rs
