@@ -377,8 +377,8 @@ public class Selection extends EnteringSelection {
 	}-*/;
 
 	/**
-	 * Sets whether or not the class returned by the given function is
-	 * associated with the selected element.
+	 * Sets whether or not the class should be associated or not to the
+	 * elements, according to the return value of the given function.
 	 * <p>
 	 * he function is evaluated for each selected element (in order), being
 	 * passed the current datum d and the current index i, with the this context
@@ -392,26 +392,26 @@ public class Selection extends EnteringSelection {
 	 * Under the hood, it will use the classList if available, for convenient
 	 * adding, removing and toggling of CSS classes.
 	 * <p>
-	 * If add is true, then all elements are assigned the specified class, if
-	 * not already assigned; if false, then the class is removed from all
-	 * selected elements, if assigned.
+	 * If the function returns true, then the element is assigned the specified
+	 * class, if not already assigned; if it returns false or null, then the
+	 * class is removed from the element, if assigned.
 	 * 
-	 * @param classNameFunction
+	 * @param className
+	 *            the class to assign or not
+	 * @param addFunction
 	 *            the function evaluated for each element and returning a
-	 *            className for each of them
-	 * @param add
-	 *            true to add false to remove the class from all the elements of
-	 *            the selection
+	 *            boolean indicating to assign or not the class to the element
 	 * @return the selection
 	 */
-	public native final Selection classed(DatumFunction<String> classNameFunction, boolean add)/*-{
+	public native final Selection classed(String classNames, DatumFunction<Boolean> addFunction)/*-{
 		return this
 				.classed(
+						classNames,
 						function(d, i) {
-							var r = classNameFunction.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
-							alert("result: " + r);
-							return r;
-						}, add);
+							var r = addFunction.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
+							return r == null ? false
+									: r.@java.lang.Boolean::booleanValue()();
+						});
 	}-*/;
 
 	public native final Selection property(String styleName, String value)/*-{
@@ -540,7 +540,7 @@ public class Selection extends EnteringSelection {
 							if (this == array) {
 								thisArg = null;
 							}
-			return keyFunction.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(thisArg,{datum:d},i);
+							return keyFunction.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(thisArg,{datum:d},i);
 						});
 	}-*/;
 
@@ -603,10 +603,11 @@ public class Selection extends EnteringSelection {
 	 * @return
 	 */
 	public native final Selection on(String eventType, DatumFunction<Void> listener) /*-{
-		var l = listener == null ? null : function(d, i) {
-			listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
-		};
-		return this.on(eventType,l);
+		var l = listener == null ? null
+				: function(d, i) {
+					listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
+				};
+		return this.on(eventType, l);
 	}-*/;
 
 	/**

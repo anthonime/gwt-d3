@@ -9,9 +9,13 @@ import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Testing
+ * 
+ * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
+ * 
+ */
 public class TestSelectionClassed extends AbstractSelectionTest {
-
-	private static final String ATTRIBUTE = "myattr";
 
 	@Override
 	public void doTest(final ComplexPanel sandbox) {
@@ -24,26 +28,26 @@ public class TestSelectionClassed extends AbstractSelectionTest {
 	protected void testSetterFunction() {
 		// 1. add
 		// works with single selection
-		Selection selection = givenASimpleSelection(new Label(""));
-		selection.classed(new DatumFunction<String>() {
+		Selection selection = givenASimpleSelection(createLabel(""));
+		selection.classed("foo bar", new DatumFunction<Boolean>() {
 			@Override
-			public String apply(final Element context, final Datum datum, final int index) {
-				return "foo bar";
+			public Boolean apply(final Element context, final Datum datum, final int index) {
+				return true;
 			}
-		}, true);
+		});
 		assertEquals("foo bar", getElementClassAttribute(0));
 
 		// works with multiple selection
-		selection = givenAMultipleSelection(new Label(""), new Label(""), new Label(""));
-		selection.classed(new DatumFunction<String>() {
+		selection = givenAMultipleSelection(createLabel(""), createLabel(""), createLabel(""));
+		selection.classed("foo bar", new DatumFunction<Boolean>() {
 			@Override
-			public String apply(final Element context, final Datum datum, final int index) {
-				return "foo bar" + index;
+			public Boolean apply(final Element context, final Datum datum, final int index) {
+				return (index % 2) == 0;
 			}
-		}, true);
-		assertEquals("foo bar0", getElementClassAttribute(0));
-		assertEquals("foo bar1", getElementClassAttribute(1));
-		assertEquals("foo bar2", getElementClassAttribute(2));
+		});
+		assertEquals("foo bar", getElementClassAttribute(0));
+		assertEquals("", getElementClassAttribute(1));
+		assertEquals("foo bar", getElementClassAttribute(2));
 
 	}
 
