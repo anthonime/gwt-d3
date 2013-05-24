@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.gwtd3.demo.client.test.AbstractTestCase;
 import org.gwtd3.demo.client.testcases.arrays.TestArrays;
+import org.gwtd3.demo.client.testcases.arrays.TestD3Arrays;
 import org.gwtd3.demo.client.testcases.csv.TestCsv;
 import org.gwtd3.demo.client.testcases.d3.TestColors;
 import org.gwtd3.demo.client.testcases.d3.TestD3;
@@ -31,45 +32,46 @@ import org.gwtd3.demo.client.testcases.tsv.TestTsv;
  */
 public class D3TestSuite {
 
-	List<AbstractTestCase> tests = new ArrayList<AbstractTestCase>();
+    List<AbstractTestCase> tests = new ArrayList<AbstractTestCase>();
 
-	public static D3TestSuite get() {
-		D3TestSuite suite = new D3TestSuite();
-		suite.tests = Arrays.asList(
-				// arrays
-				new TestArrays(),
-				// utils
-				new TestValue(),
-				// D3
-				new TestD3(),
-				new TestColors(),
-				new TestInterpolators(),
-				// seletions
-				new TestSelectionAttr(),
-				// scales
-				new TestLinearScale(),
-				new TestThresholdScale(),
-				new TestTimeScale(),
-				// svg
-				new TestAxis(),
-				new TestLine(),
-				new TestArea(),
-				new TestArc(),
-				// time
-				new TestTimeFormat(),
-				new TestTimeScales(),
-				// csv
-				new TestCsv(),
-				// tsv
-				new TestTsv()
-				);
-		return suite;
-	}
+    public static D3TestSuite get() {
+        D3TestSuite suite = new D3TestSuite();
+        suite.tests = Arrays.asList(
+                // arrays
+                new TestArrays(),
+                new TestD3Arrays(),
+                // utils
+                new TestValue(),
+                // D3
+                new TestD3(),
+                new TestColors(),
+                new TestInterpolators(),
+                // seletions
+                new TestSelectionAttr(),
+                // scales
+                new TestLinearScale(),
+                new TestThresholdScale(),
+                new TestTimeScale(),
+                // svg
+                new TestAxis(),
+                new TestLine(),
+                new TestArea(),
+                new TestArc(),
+                // time
+                new TestTimeFormat(),
+                new TestTimeScales(),
+                // csv
+                new TestCsv(),
+                // tsv
+                new TestTsv()
+                );
+        return suite;
+    }
 
-	/**
-	 * @return the tests
-	 */
-	public List<AbstractTestCase> getTests() {
-		return tests;
-	}
+    /**
+     * @return the tests
+     */
+    public List<AbstractTestCase> getTests() {
+        return tests;
+    }
 }

@@ -450,7 +450,7 @@ public class Selection extends EnteringSelection {
 			if (this == array) {
 				thisArg = null;
 			}
-			return callback.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(thisArg,{datum:d},i);
+			return keyFunction.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(thisArg,{datum:d},i);
 		});
     }-*/;
 
@@ -507,11 +507,11 @@ public class Selection extends EnteringSelection {
      * @return
      */
     public native final Selection on(String eventType, DatumFunction<Void> listener) /*-{
-		listener == null ? null: function(d, i) {
+		var l = listener == null ? null : function(d, i) {
 			listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
 		};
-		return this.on(eventType,l);
-	}-*/;
+		return this.on(eventType, l);
+    }-*/;
 
     /**
      * Adds or removes an event listener to each element in the current selection, for the specified type.
