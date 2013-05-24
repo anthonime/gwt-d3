@@ -6,12 +6,15 @@ package org.gwtd3.api;
 import java.util.Collections;
 import java.util.List;
 
+import org.gwtd3.api.arrays.Array;
+import org.gwtd3.api.core.Color;
 import org.gwtd3.api.core.Format;
 import org.gwtd3.api.core.HSLColor;
 import org.gwtd3.api.core.NumericAccessor;
 import org.gwtd3.api.core.ObjectAccessor;
 import org.gwtd3.api.core.RGBColor;
 import org.gwtd3.api.core.Selection;
+import org.gwtd3.api.core.Transition;
 import org.gwtd3.api.core.Value;
 import org.gwtd3.api.dsv.Dsv;
 import org.gwtd3.api.dsv.DsvCallback;
@@ -38,6 +41,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
+ * Entry point for D3 api modules. A lot of methods of this class allow access
+ * to other classes:
+ * <ul>
+ * <li>  {@link D3#select(Element)} methods and {@link Selection} - manipulate
+ * elements in the current document.
+ * <li> {@link Transition} - interpolate attributes and styles smoothly over
+ * time.
+ * <li> {@link Array} manipulate arrays and objects with ease.
+ * <li> {@link Color} - parse and manipulate colors; work with color spaces.
+ * <p>
+ * 
  * 
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
@@ -56,11 +70,17 @@ public class D3 extends JavaScriptObject {
 
 	// =========== selections ==============
 	/**
-	 * Selects the first element that matches the specified selector string, returning a single-element selection. If no elements in the current document match the specified
-	 * selector, returns the empty selection. If multiple elements match the selector, only the first matching element (in document traversal order) will be selected.
+	 * Selects the first element that matches the specified selector string,
+	 * returning a single-element selection. If no elements in the current
+	 * document match the specified selector, returns the empty selection. If
+	 * multiple elements match the selector, only the first matching element (in
+	 * document traversal order) will be selected.
 	 * <p>
-	 * The selector is a valid CSS3 selector. For example, you can select by tag ("div"), class (".awesome"), unique identifier ("#foo"), attribute ("[color=red]"), or containment
-	 * ("parent child"). Selectors can also be intersected (".this.that" for logical AND) or unioned (".this, .that" for logical OR)
+	 * The selector is a valid CSS3 selector. For example, you can select by tag
+	 * ("div"), class (".awesome"), unique identifier ("#foo"), attribute
+	 * ("[color=red]"), or containment ("parent child"). Selectors can also be
+	 * intersected (".this.that" for logical AND) or unioned (".this, .that" for
+	 * logical OR)
 	 * 
 	 * @param selector
 	 *            a CSS3 selector
@@ -71,7 +91,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Selects the specified element. This is useful if you already have a reference to an element, or a global such as {@link Document#getBody()}
+	 * Selects the specified element. This is useful if you already have a
+	 * reference to an element, or a global such as {@link Document#getBody()}
 	 * 
 	 * @param element
 	 *            the element to select
@@ -82,7 +103,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Selects the specified widget. This is useful if you already have a reference to a widget, or a global such as {@link RootPanel#get()}
+	 * Selects the specified widget. This is useful if you already have a
+	 * reference to a widget, or a global such as {@link RootPanel#get()}
 	 * 
 	 * @param widget
 	 *            the widget to select
@@ -93,8 +115,10 @@ public class D3 extends JavaScriptObject {
 	}
 
 	/**
-	 * Selects all elements that match the specified selector. The elements will be selected in document traversal order (top-to-bottom). If no elements in the current document
-	 * match the specified selector, returns the empty selection.
+	 * Selects all elements that match the specified selector. The elements will
+	 * be selected in document traversal order (top-to-bottom). If no elements
+	 * in the current document match the specified selector, returns the empty
+	 * selection.
 	 * 
 	 * @param selector
 	 * @return
@@ -104,9 +128,11 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Selects the specified array of elements. This is useful if you already have a reference to nodes, such as d3.selectAll(this.childNodes) within an event listener, or a global
-	 * such as document.links. The nodes argument doesn't have to be an array, exactly; any pseudo-array that can be coerced into an array (e.g., a NodeList or arguments) will
-	 * work.
+	 * Selects the specified array of elements. This is useful if you already
+	 * have a reference to nodes, such as d3.selectAll(this.childNodes) within
+	 * an event listener, or a global such as document.links. The nodes argument
+	 * doesn't have to be an array, exactly; any pseudo-array that can be
+	 * coerced into an array (e.g., a NodeList or arguments) will work.
 	 * 
 	 * @param nodes
 	 * @return
@@ -160,8 +186,10 @@ public class D3 extends JavaScriptObject {
 	// ================ Colors ================
 
 	/**
-	 * Constructs a new RGB color with the specified r, g and b channel values. Each channel must be specified as an integer in the range [0,255]. The channels are available as the
-	 * r, g and b attributes of the returned object.
+	 * Constructs a new RGB color with the specified r, g and b channel values.
+	 * Each channel must be specified as an integer in the range [0,255]. The
+	 * channels are available as the r, g and b attributes of the returned
+	 * object.
 	 * 
 	 * @param r
 	 *            the red channel
@@ -176,7 +204,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Constructs a new HSL color by parsing the specified color string. The color string may be in a variety of formats:
+	 * Constructs a new HSL color by parsing the specified color string. The
+	 * color string may be in a variety of formats:
 	 * <ul>
 	 * <li>rgb decimal - "rgb(255,255,255)"
 	 * <li>hsl decimal - "hsl(120,50%,20%)"
@@ -194,8 +223,10 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Constructs a new HSL color with the specified hue h, saturation s and lightness l. The hue must be a number in the range [0,360]. The saturation and lightness must be in the
-	 * range 0,1. These values are available as the h, s and l attributes of the returned object.
+	 * Constructs a new HSL color with the specified hue h, saturation s and
+	 * lightness l. The hue must be a number in the range [0,360]. The
+	 * saturation and lightness must be in the range 0,1. These values are
+	 * available as the h, s and l attributes of the returned object.
 	 * 
 	 * @param h
 	 *            the hue channel [0;360]
@@ -210,7 +241,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Constructs a new HSL color by parsing the specified color string. The color string may be in a variety of formats:
+	 * Constructs a new HSL color by parsing the specified color string. The
+	 * color string may be in a variety of formats:
 	 * <ul>
 	 * <li>rgb decimal - "rgb(255,255,255)"
 	 * <li>hsl decimal - "hsl(120,50%,20%)"
@@ -328,7 +360,8 @@ public class D3 extends JavaScriptObject {
 			@Override
 			public Long cast(final Value v) {
 				// this will not work !!!
-				// see https://developers.google.com/web-toolkit/doc/latest/DevGuideCodingBasicsJSNI#important
+				// see
+				// https://developers.google.com/web-toolkit/doc/latest/DevGuideCodingBasicsJSNI#important
 				// v.asLong()
 				return new Long((long) v.asDouble());
 			}
@@ -354,7 +387,9 @@ public class D3 extends JavaScriptObject {
 	}
 
 	/**
-	 * Actual JSNI implementation; the result is auto-casted to a {@link JavascriptFunctionInterpolator} and can be used by more specific versions of the
+	 * Actual JSNI implementation; the result is auto-casted to a
+	 * {@link JavascriptFunctionInterpolator} and can be used by more specific
+	 * versions of the
 	 * 
 	 * @param a
 	 * @param b
@@ -385,15 +420,24 @@ public class D3 extends JavaScriptObject {
 	/**
 	 * Stores the current event, if any.
 	 * <p>
-	 * This global variable exists during an event listener callback registered with the on operator. The current event is reset after the listener is notified in a finally block.
-	 * This allows the listener function to have the same form as other operator functions, being passed the current datum d and index i.
+	 * This global variable exists during an event listener callback registered
+	 * with the on operator. The current event is reset after the listener is
+	 * notified in a finally block. This allows the listener function to have
+	 * the same form as other operator functions, being passed the current datum
+	 * d and index i.
 	 * <p>
-	 * The {@link D3#event()} object is a DOM event and implements the standard event fields like timeStamp and keyCode as well as methods like preventDefault() and
-	 * stopPropagation(). While you can use the native event's pageX and pageY, it is often more convenient to transform the event position to the local coordinate system of the
-	 * container that received the event. For example, if you embed an SVG in the normal flow of your page, you may want the event position relative to the top-left corner of the
-	 * SVG image. If your SVG contains transforms, you might also want to know the position of the event relative to those transforms.
+	 * The {@link D3#event()} object is a DOM event and implements the standard
+	 * event fields like timeStamp and keyCode as well as methods like
+	 * preventDefault() and stopPropagation(). While you can use the native
+	 * event's pageX and pageY, it is often more convenient to transform the
+	 * event position to the local coordinate system of the container that
+	 * received the event. For example, if you embed an SVG in the normal flow
+	 * of your page, you may want the event position relative to the top-left
+	 * corner of the SVG image. If your SVG contains transforms, you might also
+	 * want to know the position of the event relative to those transforms.
 	 * <p>
-	 * Use the d3.mouse operator for the standard mouse pointer, and use d3.touches for multitouch events on iOS.
+	 * Use the d3.mouse operator for the standard mouse pointer, and use
+	 * d3.touches for multitouch events on iOS.
 	 * 
 	 * @return
 	 */
@@ -402,9 +446,10 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Returns the x and y coordinates of the current d3.event, relative to the specified container.
-	 * The container may be an HTML or SVG container element, such as an svg:g or svg:svg.
-	 * The coordinates are returned as a two-element array [ x, y].
+	 * Returns the x and y coordinates of the current d3.event, relative to the
+	 * specified container. The container may be an HTML or SVG container
+	 * element, such as an svg:g or svg:svg. The coordinates are returned as a
+	 * two-element array [ x, y].
 	 * 
 	 * @param container
 	 * @return
@@ -414,9 +459,10 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Returns the x coordinate of the current d3.event, relative to the specified container.
-	 * The container may be an HTML or SVG container element, such as an svg:g or svg:svg.
-	 * The coordinates are returned as a two-element array [ x, y].
+	 * Returns the x coordinate of the current d3.event, relative to the
+	 * specified container. The container may be an HTML or SVG container
+	 * element, such as an svg:g or svg:svg. The coordinates are returned as a
+	 * two-element array [ x, y].
 	 * 
 	 * @param container
 	 * @return
@@ -426,9 +472,10 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Returns the y coordinate of the current d3.event, relative to the specified container.
-	 * The container may be an HTML or SVG container element, such as an svg:g or svg:svg.
-	 * The coordinates are returned as a two-element array [ x, y].
+	 * Returns the y coordinate of the current d3.event, relative to the
+	 * specified container. The container may be an HTML or SVG container
+	 * element, such as an svg:g or svg:svg. The coordinates are returned as a
+	 * two-element array [ x, y].
 	 * 
 	 * @param container
 	 * @return
@@ -447,11 +494,15 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (CSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/csv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the CSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvCallback<T> callback) /*-{
 		return $wnd.d3
@@ -463,12 +514,17 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (CSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null. The accessor may be specified, which is then passed to d3.csv.parse; the accessor may also be specified by
-	 * using the return request object’s row function.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/csv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the CSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null. The accessor may be
+	 * specified, which is then passed to d3.csv.parse; the accessor may also be
+	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvObjectAccessor<T> accessor, DsvCallback<T> callback)/*-{
 		return $wnd.d3
@@ -483,12 +539,17 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (CSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the CSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null. The accessor may be specified, which is then passed to d3.csv.parse; the accessor may also be specified by
-	 * using the return request object’s row function.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/csv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the CSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null. The accessor may be
+	 * specified, which is then passed to d3.csv.parse; the accessor may also be
+	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> csv(String url, DsvObjectAccessor<T> accessor)/*-{
 		return $wnd.d3
@@ -500,10 +561,12 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (CSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (CSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/csv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/csv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request.
 	 */
 	public static final native <T> Dsv<T> csv(String url)/*-{
 		return $wnd.d3.csv(url);
@@ -519,11 +582,15 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (TSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (TSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/tsv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the TSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/tsv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the TSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvCallback<T> callback) /*-{
 		return $wnd.d3
@@ -535,12 +602,17 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (TSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (TSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/tsv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the TSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null. The accessor may be specified, which is then passed to d3.tsv.parse; the accessor may also be specified by
-	 * using the return request object’s row function.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/tsv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the TSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null. The accessor may be
+	 * specified, which is then passed to d3.tsv.parse; the accessor may also be
+	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvObjectAccessor<T> accessor, DsvCallback<T> callback)/*-{
 		return $wnd.d3
@@ -555,12 +627,17 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (TSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (TSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/tsv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request. When the TSV data is available, the specified callback will be invoked with the parsed rows as the argument. If an error
-	 * occurs, the callback function will instead be invoked with null. The accessor may be specified, which is then passed to d3.tsv.parse; the accessor may also be specified by
-	 * using the return request object’s row function.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/tsv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request. When
+	 * the TSV data is available, the specified callback will be invoked with
+	 * the parsed rows as the argument. If an error occurs, the callback
+	 * function will instead be invoked with null. The accessor may be
+	 * specified, which is then passed to d3.tsv.parse; the accessor may also be
+	 * specified by using the return request object’s row function.
 	 */
 	public static final native <T> Dsv<T> tsv(String url, DsvObjectAccessor<T> accessor)/*-{
 		return $wnd.d3
@@ -572,10 +649,12 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Issues an HTTP GET request for the comma-separated values (TSV) file at the specified url.
+	 * Issues an HTTP GET request for the comma-separated values (TSV) file at
+	 * the specified url.
 	 * <p>
-	 * The file contents are assumed to be RFC4180-compliant. The mime type of the request will be "text/tsv". The request is processed asynchronously, such that this method
-	 * returns immediately after opening the request.
+	 * The file contents are assumed to be RFC4180-compliant. The mime type of
+	 * the request will be "text/tsv". The request is processed asynchronously,
+	 * such that this method returns immediately after opening the request.
 	 */
 	public static final native <T> Dsv<T> tsv(String url)/*-{
 		return $wnd.d3.tsv(url);
@@ -594,22 +673,26 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Find the minimum and maximum value in an array. This is equivalent to calling d3.min and d3.max simultaneously.
+	 * Find the minimum and maximum value in an array. This is equivalent to
+	 * calling d3.min and d3.max simultaneously.
 	 * 
 	 * @param array
 	 *            the given array.
-	 * @return the minimum and maximum value in the given array using natural order.
+	 * @return the minimum and maximum value in the given array using natural
+	 *         order.
 	 */
 	public static final native JsArrayMixed extent(JavaScriptObject array) /*-{
 		return $wnd.d3.extent(array);
 	}-*/;
 
 	/**
-	 * Find the minimum and maximum value in an array. This is equivalent to calling d3.min and d3.max simultaneously.
+	 * Find the minimum and maximum value in an array. This is equivalent to
+	 * calling d3.min and d3.max simultaneously.
 	 * 
 	 * @param array
 	 *            the given array.
-	 * @return the minimum and maximum value in the given array using natural order.
+	 * @return the minimum and maximum value in the given array using natural
+	 *         order.
 	 */
 	public static final native <D, R> JsArrayMixed extent(JavaScriptObject array, ObjectAccessor<D, R> accessor) /*-{
         var accessor = accessor.@org.gwtd3.api.core.ObjectAccessor::apply(Ljava/lang/Object;I);
@@ -621,9 +704,13 @@ public class D3 extends JavaScriptObject {
 	/**
 	 * Format a number as a string.
 	 * <p>
-	 * Returns a new format function with the given string specifier. A format function takes a number as the only argument, and returns a string representing the formatted number.
+	 * Returns a new format function with the given string specifier. A format
+	 * function takes a number as the only argument, and returns a string
+	 * representing the formatted number.
 	 * 
-	 * @see <a href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">D3.js official documentation</a>
+	 * @see <a
+	 *      href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">D3.js
+	 *      official documentation</a>
 	 * @param specifier
 	 *            the given string specifier.
 	 * @return the format function.
@@ -680,12 +767,19 @@ public class D3 extends JavaScriptObject {
 	/**
 	 * Generate a range of numeric values.
 	 * <p>
-	 * Generates an array containing an arithmetic progression, similar to the Python built-in range. This method is often used to iterate over a sequence of numeric or integer
-	 * values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due
-	 * to floating point precision. If step is omitted, it defaults to 1. If start is omitted, it defaults to 0. The stop value is not included in the result. The full form returns
-	 * an array of numbers [*start*, start + step, start + 2 * step, ...]. If step is positive, the last element is the largest start + i * step less than stop; if step is
-	 * negative, the last element is the smallest start + i * step greater than stop. If the returned array would contain an infinite number of values, an error is thrown rather
-	 * than causing an infinite loop.
+	 * Generates an array containing an arithmetic progression, similar to the
+	 * Python built-in range. This method is often used to iterate over a
+	 * sequence of numeric or integer values, such as the indexes into an array.
+	 * Unlike the Python version, the arguments are not required to be integers,
+	 * though the results are more predictable if they are due to floating point
+	 * precision. If step is omitted, it defaults to 1. If start is omitted, it
+	 * defaults to 0. The stop value is not included in the result. The full
+	 * form returns an array of numbers [*start*, start + step, start + 2 *
+	 * step, ...]. If step is positive, the last element is the largest start +
+	 * i * step less than stop; if step is negative, the last element is the
+	 * smallest start + i * step greater than stop. If the returned array would
+	 * contain an infinite number of values, an error is thrown rather than
+	 * causing an infinite loop.
 	 * 
 	 * @param start
 	 * @param stop
