@@ -58,33 +58,23 @@ public class D3Demo implements EntryPoint {
 		DockLayoutPanel container = new DockLayoutPanel(Unit.PX);
 		container.setSize("100%", "100%");
 
-		container.addNorth(new Label("GWT-D3 : A thin GWT wrapper around D3.",
-				false), 20);
-		container.addNorth(new Label("D3 API version: " + D3.version(), false),
-				20);
+		container.addNorth(new Label("GWT-D3 : A thin GWT wrapper around D3.", false), 20);
+		container.addNorth(new Label("D3 API version: " + D3.version(), false), 20);
 
 		FlowPanel p = new FlowPanel();
 		ComplexPanel buttonContainer = new VerticalPanel();
 		buttonContainer.add(new TestButton());
 		buttonContainer.add(new DemoButton("Arc", ArcDemo.factory()));
-		buttonContainer.add(new DemoButton("Stupid example", StupidExample
-				.factory()));
-		buttonContainer.add(new DemoButton("Stupid example 2", StupidExample2
-				.factory()));
-		buttonContainer.add(new DemoButton("General Update Pattern I",
-				GeneralUpdatePattern1.factory()));
-		buttonContainer.add(new DemoButton("General Update Pattern II",
-				GeneralUpdatePattern2.factory()));
-		buttonContainer.add(new DemoButton("General Update Pattern III",
-				GeneralUpdatePattern3.factory()));
+		buttonContainer.add(new DemoButton("Stupid example", StupidExample.factory()));
+		buttonContainer.add(new DemoButton("Stupid example 2", StupidExample2.factory()));
+		buttonContainer.add(new DemoButton("General Update Pattern I", GeneralUpdatePattern1.factory()));
+		buttonContainer.add(new DemoButton("General Update Pattern II", GeneralUpdatePattern2.factory()));
+		buttonContainer.add(new DemoButton("General Update Pattern III", GeneralUpdatePattern3.factory()));
 		buttonContainer.add(new DemoButton("Arc Tween", ArcTween.factory()));
-		buttonContainer.add(new DemoButton("Axis component", AxisComponent
-				.factory()));
-		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext
-				.factory()));
+		buttonContainer.add(new DemoButton("Axis component", AxisComponent.factory()));
+		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext.factory()));
 		buttonContainer.add(new DemoButton("Bar chart", BarChart.factory()));
-		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram
-				.factory()));
+		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram.factory()));
 		p.add(buttonContainer);
 		container.addWest(p, 200);
 
@@ -161,8 +151,7 @@ public class D3Demo implements EntryPoint {
 			currentDemo.stop();
 			demoContainer.remove(currentDemo);
 			currentDemo = null;
-		} else if ((testContainer != null)
-				&& testContainer.getParent().equals(demoContainer)) {
+		} else if ((testContainer != null) && testContainer.getParent().equals(demoContainer)) {
 			demoContainer.remove(testContainer);
 		}
 
