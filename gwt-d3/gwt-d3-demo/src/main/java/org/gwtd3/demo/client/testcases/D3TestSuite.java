@@ -18,6 +18,7 @@ import org.gwtd3.demo.client.testcases.scales.TestLinearScale;
 import org.gwtd3.demo.client.testcases.scales.TestThresholdScale;
 import org.gwtd3.demo.client.testcases.scales.TestTimeScale;
 import org.gwtd3.demo.client.testcases.selection.TestSelectionAttr;
+import org.gwtd3.demo.client.testcases.selection.TestSelectionClassed;
 import org.gwtd3.demo.client.testcases.svg.TestArc;
 import org.gwtd3.demo.client.testcases.svg.TestArea;
 import org.gwtd3.demo.client.testcases.svg.TestAxis;
@@ -32,46 +33,37 @@ import org.gwtd3.demo.client.testcases.tsv.TestTsv;
  */
 public class D3TestSuite {
 
-    List<AbstractTestCase> tests = new ArrayList<AbstractTestCase>();
+	List<AbstractTestCase> tests = new ArrayList<AbstractTestCase>();
 
-    public static D3TestSuite get() {
-        D3TestSuite suite = new D3TestSuite();
-        suite.tests = Arrays.asList(
-                // arrays
-                new TestArrays(),
+	public static D3TestSuite get() {
+		D3TestSuite suite = new D3TestSuite();
+		suite.tests = Arrays.asList(
+		// arrays
+				new TestArrays(),
                 new TestD3Arrays(),
-                // utils
-                new TestValue(),
-                // D3
-                new TestD3(),
-                new TestColors(),
-                new TestInterpolators(),
-                // seletions
-                new TestSelectionAttr(),
-                // scales
-                new TestLinearScale(),
-                new TestThresholdScale(),
-                new TestTimeScale(),
-                // svg
-                new TestAxis(),
-                new TestLine(),
-                new TestArea(),
-                new TestArc(),
-                // time
-                new TestTimeFormat(),
-                new TestTimeScales(),
-                // csv
-                new TestCsv(),
-                // tsv
-                new TestTsv()
-                );
-        return suite;
-    }
+				// utils
+				new TestValue(),
+				// D3
+				new TestD3(), new TestColors(), new TestInterpolators(),
+				// seletions
+				new TestSelectionAttr(), new TestSelectionClassed(),
+				// scales
+				new TestLinearScale(), new TestThresholdScale(), new TestTimeScale(),
+				// svg
+				new TestAxis(), new TestLine(), new TestArea(), new TestArc(),
+				// time
+				new TestTimeFormat(), new TestTimeScales(),
+				// csv
+				new TestCsv(),
+				// tsv
+				new TestTsv());
+		return suite;
+	}
 
-    /**
-     * @return the tests
-     */
-    public List<AbstractTestCase> getTests() {
-        return tests;
-    }
+	/**
+	 * @return the tests
+	 */
+	public List<AbstractTestCase> getTests() {
+		return tests;
+	}
 }

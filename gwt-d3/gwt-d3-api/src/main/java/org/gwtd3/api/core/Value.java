@@ -3,6 +3,10 @@ package org.gwtd3.api.core;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 
+/**
+ * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
+ * 
+ */
 public class Value extends JavaScriptObject {
 
     protected Value() {
@@ -133,7 +137,7 @@ public class Value extends JavaScriptObject {
      * 
      */
     public final native boolean isDefined()/*-{
-		return !(this.datum === undefined)
+		return typeof (this.datum) != "undefined";
     }-*/;
 
     /**
@@ -151,11 +155,12 @@ public class Value extends JavaScriptObject {
 		return this.datum === string;
     }-*/;
 
-    // public final native boolean isNumber()/*-{
-    // //return this.datum === string;
-    // var o = this.datum;
-    // return !isNaN(o - 0) && o !== null && o !== "" && o !== false && o !== true;
-    // }-*/;
+	// public final native boolean isNumber()/*-{
+	// //return this.datum === string;
+	// var o = this.datum;
+	// return !isNaN(o - 0) && o !== null && o !== "" && o !== false && o !==
+	// true;
+	// }-*/;
 
     public final native boolean isFunction()/*-{
 		return typeof (this.datum) == 'function';
