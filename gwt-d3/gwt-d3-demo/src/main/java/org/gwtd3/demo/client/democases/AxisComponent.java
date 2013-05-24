@@ -2,8 +2,9 @@ package org.gwtd3.demo.client.democases;
 
 import org.gwtd3.api.D3;
 import org.gwtd3.api.JsArrays;
+import org.gwtd3.api.arrays.Array;
+import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Datum;
-import org.gwtd3.api.core.NumericAccessor;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.core.Transition;
 import org.gwtd3.api.core.Value;
@@ -146,13 +147,16 @@ public class AxisComponent extends FlowPanel implements DemoCase {
 
                 // // Compute the minimum and maximum date, and the maximum price.
                 x.domain(JsArrays.asJsArray(values.get(0).getDate(), values.get(values.length() - 1).getDate()));
-                y.domain(JsArrays.asJsArray(0, D3.max(values, new NumericAccessor<Data>() {
-                    @Override
-                    public double apply(final Data o) {
-                        return o.getPrice();
-                    }
-                }))).nice();
 
+                int maxY = D3.max(values, new NumericForEachCallback() {
+                    @Override
+                    public double forEach(final Object thisArg, final Value element, final int index,
+                            final Array<?> array) {
+                        return element.<Data> as().getPrice();
+                    }
+                }).asInt();
+                System.out.println("the max Y is " + maxY + " among " + values);
+                y.domain(JsArrays.asJsArray(0, maxY)).nice();
                 // Add an SVG element with the desired dimensions and margin.
                 final Selection svg = D3.select(AxisComponent.this).append("svg:svg")
                         .attr("class", css.svg())
@@ -228,6 +232,16 @@ public class AxisComponent extends FlowPanel implements DemoCase {
         private final JsDate date;
 
         private final double price;
+
+        /*
+         * (non-Javadoc)
+         * 
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString() {
+            return "Data [date=" + date.getTime() + ", price=" + price + "]";
+        }
 
         public Data(final String symbol, final JsDate date, final double price) {
             super();

@@ -4,7 +4,6 @@ import org.gwtd3.api.core.Value;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
-import com.google.gwt.core.client.JsArrayString;
 
 public class Scale<S extends Scale<S>> extends JavaScriptObject {
 
@@ -33,6 +32,27 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
 
     public native final S domain(JavaScriptObject d) /*-{
 		return this.domain(d);
+    }-*/;
+
+    public native final S domain(double a, double b) /*-{
+		return this.domain(a, b);
+    }-*/;
+
+    public native final S domain(String a, String b) /*-{
+		return this.domain(a, b);
+    }-*/;
+
+    /**
+     * Set the domain of this scale function with a
+     * domain that can be understood by Javascript.
+     * <p>
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
+    public native final <T> S domain(T a, T b) /*-{
+		return this.domain(a, b);
     }-*/;
 
     /**
@@ -68,7 +88,7 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
      */
     public final native S range(JavaScriptObject values) /*-{
 		return this.range(values);
-	}-*/;
+    }-*/;
 
     /**
      * See {@link #range(JsArrayInteger)}.
@@ -123,6 +143,18 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
      * @return the output value
      */
     public native final Value apply(JavaScriptObject d)/*-{
+		return {
+			datum : this(d)
+		};
+    }-*/;
+
+    /**
+     * Given a value x in the input domain,
+     * returns the corresponding value in the output range.
+     * @param d the input value
+     * @return the output value
+     */
+    public native final <T> Value apply(T d)/*-{
 		return {
 			datum : this(d)
 		};

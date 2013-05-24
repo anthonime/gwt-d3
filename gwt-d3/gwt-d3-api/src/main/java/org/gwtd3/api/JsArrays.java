@@ -3,6 +3,8 @@
  */
 package org.gwtd3.api;
 
+import java.util.Collection;
+
 import org.gwtd3.api.arrays.Array;
 
 import com.google.gwt.core.client.GWT;
@@ -59,6 +61,21 @@ public class JsArrays {
         Array<T> dest = JavaScriptObject.createArray().cast();
         for (int i = 0; i < array.length; ++i) {
             dest.push(array[i]);
+        }
+        return dest;
+    }
+
+    /**
+     * @param data
+     * @return
+     */
+    public static <T> Array<T> asJsArray(final Collection<T> iterable) {
+        if (GWT.isScript()) {
+            return arrayAsJsArrayForProdMode(iterable.toArray()).cast();
+        }
+        Array<T> dest = JavaScriptObject.createArray().cast();
+        for (T t : iterable) {
+            dest.push(t);
         }
         return dest;
     }
