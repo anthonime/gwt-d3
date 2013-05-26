@@ -211,10 +211,10 @@ public class AxisComponent extends FlowPanel implements DemoCase {
                         int i = (int) Math.floor((Math.random() * n) / 2);
                         int j = i + (int) Math.floor((Math.random() * n) / 2) + 1;
                         x.domain(JsArrays.asJsArray(values.get(i).getDate(), values.get(j).getDate()));
-                        Transition duration = svg.transition().duration(750);
-                        duration.select("." + css.x() + "." + css.axis()).call(xAxis);
-                        duration.select("." + css.area()).attr("d", area.apply(values));
-                        duration.select("." + css.line()).attr("d", line.apply(values));
+                        Transition transition = svg.transition().duration(750);
+                        transition.select("." + css.x() + "." + css.axis()).call(xAxis);
+                        transition.select("." + css.area()).attr("d", area.apply(values));
+                        transition.select("." + css.line()).attr("d", line.apply(values));
                         return null;
                     };
                 });

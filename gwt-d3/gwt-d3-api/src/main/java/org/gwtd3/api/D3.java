@@ -10,7 +10,7 @@ import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
 import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Color;
-import org.gwtd3.api.core.Format;
+import org.gwtd3.api.core.Formatter;
 import org.gwtd3.api.core.HSLColor;
 import org.gwtd3.api.core.ObjectAccessor;
 import org.gwtd3.api.core.RGBColor;
@@ -884,24 +884,6 @@ public class D3 extends JavaScriptObject {
     }-*/;
 
 	/**
-	 * Format a number as a string.
-	 * <p>
-	 * Returns a new format function with the given string specifier. A format
-	 * function takes a number as the only argument, and returns a string
-	 * representing the formatted number.
-	 * 
-	 * @see <a
-	 *      href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">D3.js
-	 *      official documentation</a>
-	 * @param specifier
-	 *            the given string specifier.
-	 * @return the format function.
-	 */
-	public static final native Format format(String specifier) /*-{
-		return $wnd.d3.format(specifier);
-	}-*/;
-
-	/**
 	 * Compare two values for sorting.
 	 * <p>
 	 * This is the comparator function for natural order.
@@ -970,6 +952,25 @@ public class D3 extends JavaScriptObject {
 	 */
 	public static final native JavaScriptObject range(double start, double stop, double step) /*-{
 		return $wnd.d3.range(start, stop, step);
+	}-*/;
+
+	// =================== format methods ====================
+
+	/**
+	 * Returns a new {@link Formatter} function with the given string specifier.
+	 * A format function takes a number as the only argument, and returns a
+	 * string representing the formatted number. Please see {@link Formatter}
+	 * javadoc for the specifier specification.
+	 * 
+	 * @see <a
+	 *      href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">D3.js
+	 *      official documentation</a>
+	 * @param specifier
+	 *            the given string specifier.
+	 * @return the format function.
+	 */
+	public static final native Formatter format(String specifier) /*-{
+		return $wnd.d3.format(specifier);
 	}-*/;
 
 }

@@ -6,7 +6,7 @@ import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
 import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Datum;
-import org.gwtd3.api.core.Format;
+import org.gwtd3.api.core.Formatter;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.core.Value;
 import org.gwtd3.api.dsv.DsvCallback;
@@ -63,7 +63,7 @@ public class BarChart extends FlowPanel implements DemoCase {
         final int width = 960 - margin.left - margin.right;
         final int height = 500 - margin.top - margin.bottom;
 
-        final Format formatPercent = D3.format(".0%");
+        final Formatter formatPercent = D3.format(".0%");
 
         final OrdinalScale x = D3.scale().ordinal()
                 .rangeRoundBands(JsArrays.asJsArray(0, width), .1);

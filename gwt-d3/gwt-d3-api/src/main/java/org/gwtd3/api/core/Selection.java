@@ -464,7 +464,7 @@ public class Selection extends EnteringSelection {
 	}-*/;
 
 	public native final Selection html(String value)/*-{
-		throw new UnsupportedOperationException("not yet implemented");
+		return this.html(value);
 	}-*/;
 
 	/**

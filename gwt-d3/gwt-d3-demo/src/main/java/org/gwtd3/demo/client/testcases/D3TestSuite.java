@@ -24,6 +24,7 @@ import org.gwtd3.demo.client.testcases.svg.TestArea;
 import org.gwtd3.demo.client.testcases.svg.TestAxis;
 import org.gwtd3.demo.client.testcases.svg.TestLine;
 import org.gwtd3.demo.client.testcases.time.TestTimeFormat;
+import org.gwtd3.demo.client.testcases.time.TestTimeIntervals;
 import org.gwtd3.demo.client.testcases.time.TestTimeScales;
 import org.gwtd3.demo.client.testcases.tsv.TestTsv;
 
@@ -38,21 +39,20 @@ public class D3TestSuite {
 	public static D3TestSuite get() {
 		D3TestSuite suite = new D3TestSuite();
 		suite.tests = Arrays.asList(
-		// arrays
-				new TestArrays(),
-                new TestD3Arrays(),
+				// arrays
+				new TestArrays(), new TestD3Arrays(),
 				// utils
 				new TestValue(),
 				// D3
 				new TestD3(), new TestColors(), new TestInterpolators(),
-				// seletions
+				// selections
 				new TestSelectionAttr(), new TestSelectionClassed(),
 				// scales
 				new TestLinearScale(), new TestThresholdScale(), new TestTimeScale(),
 				// svg
 				new TestAxis(), new TestLine(), new TestArea(), new TestArc(),
 				// time
-				new TestTimeFormat(), new TestTimeScales(),
+				new TestTimeFormat(), new TestTimeScales(), new TestTimeIntervals(),
 				// csv
 				new TestCsv(),
 				// tsv
