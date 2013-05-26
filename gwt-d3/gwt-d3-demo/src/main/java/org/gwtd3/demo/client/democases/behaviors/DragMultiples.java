@@ -36,10 +36,13 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 	private void init() {
 
 		Drag drag = D3.behavior().drag()
+				// the origin will be set with the data of svg
+				// on mousedown
 				.origin(D3.identity())
 				.on(Drag.DragEventType.drag, new OnDragMove());
 
 		Selection svg = D3.select(this).selectAll("svg")
+				// set the data as the center of the squares
 				.data(D3.range(16).map(
 						new ForEachCallback<Coords>() {
 							@Override
@@ -69,6 +72,7 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 					}
 				})
 				.style("cursor", "pointer")
+				// listeners are registered
 				.call(drag);
 
 	}
@@ -78,9 +82,10 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 		public Void apply(final Element context, final Datum d, final int index) {
 			Coords datum = d.as();
 			// compute the new x and y using the mouse position
+			// note: the mouse position has been adjusted to the drag 'origin'
 			double newX = Math.max(radius, Math.min(width - radius, D3.eventAsCoords().x()));
 			double newY = Math.max(radius, Math.min(height - radius, D3.eventAsCoords().y()));
-			// update the datum itself
+			// update the datum itself, to adjust the origin
 			datum.x(newX).y(newY);
 			// update the position of the circle
 			D3.select(context)

@@ -7,11 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.gwtd3.api.arrays.Array;
-import org.gwtd3.api.behaviour.Behavior;
-import org.gwtd3.api.behaviour.Drag;
-import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
 import org.gwtd3.api.arrays.NumericForEachCallback;
+import org.gwtd3.api.behaviour.Behavior;
+import org.gwtd3.api.behaviour.Drag;
 import org.gwtd3.api.core.Color;
 import org.gwtd3.api.core.Formatter;
 import org.gwtd3.api.core.HSLColor;
@@ -447,13 +446,29 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Retrieve the current event if any, as a {@link Coords} object.
-	 * This is useful when using {@link Drag} behavior.
+	 * Retrieve the current event if any, as a {@link Coords} object containing
+	 * the x and y of the mouse. This is useful when using {@link Drag}
+	 * behavior.
 	 * 
 	 * @return the current event as a Coords object
 	 */
 	public static final native Coords eventAsCoords()/*-{
 		return $wnd.d3.event;
+	}-*/;
+
+	/**
+	 * Retrieve the current event if any, as a {@link Coords} object containing
+	 * the dx and dy representing the element's coordinates relative to its
+	 * position at the beginning of the gesture. This is useful when using
+	 * {@link Drag} behavior.
+	 * 
+	 * @return the current event as a Coords object
+	 */
+	public static final native Coords eventAsDCoords()/*-{
+		return {
+			x : $wnd.d3.event.dx,
+			y : $wnd.d3.event.dy
+		};
 	}-*/;
 
 	/**
@@ -916,8 +931,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Generate a range of <code>stop-1</code> numeric values,
-	 * stored in an array, going from 0 to stop (excluded).
+	 * Generate a range of <code>stop-1</code> numeric values, stored in an
+	 * array, going from 0 to stop (excluded).
 	 * 
 	 * @see D3#range(double, double, double)
 	 * @param stop
@@ -929,9 +944,8 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Generate a range of numeric values,
-	 * stored in an array, going from 0 to stop (exluded),
-	 * separated by step (>0).
+	 * Generate a range of numeric values, stored in an array, going from 0 to
+	 * stop (exluded), separated by step (>0).
 	 * <p>
 	 * For instance, range(10, 3) would produce the array [0,3,6,9].
 	 * 
@@ -994,7 +1008,6 @@ public class D3 extends JavaScriptObject {
 	public static final native Formatter format(String specifier) /*-{
 		return $wnd.d3.format(specifier);
 	}-*/;
-
 
 	// =========== behaviours ==============
 	/**
