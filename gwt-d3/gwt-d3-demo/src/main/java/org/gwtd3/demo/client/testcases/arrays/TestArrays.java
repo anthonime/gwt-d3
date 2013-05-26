@@ -54,9 +54,9 @@ public class TestArrays extends AbstractTestCase {
 			}
 		});
 		assertEquals(3, result.length());
-		assertEquals("5", result.get(0));
-		assertEquals("14", result.get(1));
-		assertEquals("1f", result.get(2));
+		assertEquals("5", result.getString(0));
+		assertEquals("14", result.getString(1));
+		assertEquals("1f", result.getString(2));
 	}
 
 	private void testSome() {
@@ -119,11 +119,11 @@ public class TestArrays extends AbstractTestCase {
 	private void testSlice() {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple", "Mango", "Orange", "Lemon"));
 		Array<String> slicedFruits = fruits.slice(4);
-		assertEquals("Orange", slicedFruits.get(0));
-		assertEquals("Lemon", slicedFruits.get(1));
+		assertEquals("Orange", slicedFruits.getString(0));
+		assertEquals("Lemon", slicedFruits.getString(1));
 		slicedFruits = fruits.slice(3, 5);
-		assertEquals("Mango", slicedFruits.get(0));
-		assertEquals("Orange", slicedFruits.get(1));
+		assertEquals("Mango", slicedFruits.getString(0));
+		assertEquals("Orange", slicedFruits.getString(1));
 	}
 
 	private void testShift() {
@@ -136,9 +136,9 @@ public class TestArrays extends AbstractTestCase {
 	private void testReverse() {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple"));
 		Array<String> fruits2 = fruits.reverse();
-		assertEquals("Apple", fruits2.get(0));
-		assertEquals("Orange", fruits2.get(1));
-		assertEquals("Banana", fruits2.get(2));
+		assertEquals("Apple", fruits2.getString(0));
+		assertEquals("Orange", fruits2.getString(1));
+		assertEquals("Banana", fruits2.getString(2));
 	}
 
 	private void testPush() {
@@ -158,7 +158,7 @@ public class TestArrays extends AbstractTestCase {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple", "Mango", "Orange", "Lemon"));
 		fruits.set(0, "Other");
 		assertEquals(6, fruits.length());
-		assertEquals("Other", fruits.get(0));
+		assertEquals("Other", fruits.getString(0));
 	}
 
 	private void testLength() {
@@ -183,7 +183,7 @@ public class TestArrays extends AbstractTestCase {
 		assertEquals(true, fruits.getBoolean(0));
 		assertEquals(5.6, fruits.getNumber(1));
 		assertEquals("Apple", fruits.getString(2));
-		assertEquals(obj, fruits.get(3));
+		assertEquals(obj, fruits.getObject(3));
 		assertEquals(obj, fruits.getObject(3));
 	}
 
