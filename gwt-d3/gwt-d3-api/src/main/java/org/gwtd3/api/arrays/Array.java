@@ -3,11 +3,15 @@ package org.gwtd3.api.arrays;
 import org.gwtd3.api.core.Value;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayInteger;
+import com.google.gwt.core.client.JsArrayMixed;
+import com.google.gwt.core.client.JsArrayNumber;
+import com.google.gwt.core.client.JsArrayString;
 
 /**
- * An object wrapping a Javascript array-like structure.
+ * An Javascript object wrapping an array-like structure.
  * <p>
- * 
  * 
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
@@ -108,7 +112,41 @@ public class Array<T> extends JavaScriptObject {
 		return [ i1, i2, i3, i4, i5 ];
 	}-*/;
 
+	// ============== typecasting methods ==============
+
+	public final native JsArrayNumber asJsArrayNumber()/*-{
+		return this;
+	}-*/;
+
+	public final native JsArrayMixed asJsArrayMixed()/*-{
+		return this;
+	}-*/;
+
+	public final native <R extends JavaScriptObject> JsArray<R> asJsArray()/*-{
+		return this;
+	}-*/;
+
+	public final native JsArrayInteger asJsArrayInteger()/*-{
+		return this;
+	}-*/;
+
+	public final native JsArrayString asJsArrayString()/*-{
+		return this;
+	}-*/;
+
 	// ============== get methods ==============
+
+	/**
+	 * Return the element at the specified index of this domain.
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public final native Value get(int index)/*-{
+		return {
+			datum : this[index]
+		};
+	}-*/;
 
 	/**
 	 * Return the item at the index i.
@@ -117,7 +155,7 @@ public class Array<T> extends JavaScriptObject {
 	 *            the index of the item
 	 * @return the item
 	 */
-	public native final T get(int i) /*-{
+	public native final T getObject(int i) /*-{
 		return this[i];
 	}-*/;
 
@@ -165,17 +203,6 @@ public class Array<T> extends JavaScriptObject {
 	 */
 	public final native double getNumber(int index) /*-{
 		return Number(this[index]);
-	}-*/;
-
-	/**
-	 * Return the item at the index i.
-	 * 
-	 * @param i
-	 *            the index of the item
-	 * @return the item
-	 */
-	public final native <R extends JavaScriptObject> R getObject(int index) /*-{
-		return this[index] != null ? Object(this[index]) : null;
 	}-*/;
 
 	// ============== pop methods ==============

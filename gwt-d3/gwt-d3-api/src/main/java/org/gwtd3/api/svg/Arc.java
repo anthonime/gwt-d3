@@ -3,7 +3,6 @@
  */
 package org.gwtd3.api.svg;
 
-import org.gwtd3.api.IsFunction;
 
 /**
  * A generator to create an arc by defining the inner radius, the outer radius, the start angle, and the end angle.
@@ -27,7 +26,7 @@ import org.gwtd3.api.IsFunction;
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
  */
-public class Arc extends PathDataGenerator implements IsFunction {
+public class Arc extends PathDataGenerator {
 
 	protected Arc() {
 	}

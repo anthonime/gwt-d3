@@ -24,8 +24,8 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
 
 	// ========= Domain functions ===============
 
-	/**
-	 * @return the scale current input domain
+	/*
+	 * * @return the scale current input domain
 	 */
 	public native final Domain domain()/*-{
 		return this.domain();
@@ -87,11 +87,17 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
 	/**
 	 * Set the scale's output range.
 	 * <p>
-	 * Sets the scale's output range to the specified array of values. The array
-	 * must contain two or more values, to match the cardinality of the input
-	 * domain. The elements in the given array need not be numbers; any value
-	 * that is supported by the underlying interpolator will work. However,
-	 * numeric ranges are required for the invert operator.
+	 * <<<<<<< HEAD Sets the scale's output range to the specified array of
+	 * values. The array must contain two or more values, to match the
+	 * cardinality of the input domain. The elements in the given array need not
+	 * be numbers; any value that is supported by the underlying interpolator
+	 * will work. However, numeric ranges are required for the invert operator.
+	 * ======= Sets the scale's output range to the specified array of values.
+	 * The array must contain two or more values, to match the cardinality of
+	 * the input domain. The elements in the given array need not be numbers;
+	 * any value that is supported by the underlying interpolator will work.
+	 * However, numeric ranges are required for the invert operator. >>>>>>>
+	 * colorpalette
 	 * 
 	 * @param values
 	 *            the array of values.
@@ -170,17 +176,6 @@ public class Scale<S extends Scale<S>> extends JavaScriptObject {
 	 * Given a value x in the input domain, returns the corresponding value in
 	 * the output range.
 	 * 
-	 * @param d
-	 *            the input value
-	 * @return the output value
-	 */
-	public native final <T> Value apply(T d)/*-{
-		return {
-			datum : this(d)
-		};
-	}-*/;
-
-	/**
 	 * @see #apply(JavaScriptObject)
 	 * @param d
 	 *            the input value

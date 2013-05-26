@@ -10,9 +10,8 @@ public class TestThresholdScale extends AbstractTestCase {
 
 	@Override
 	public void doTest(final ComplexPanel sandbox) {
-		Domain domain = D3.scale().threshold().domain();
+		Domain domain = D3.scale.threshold().domain();
 		assertEquals(1, domain.length());
-		assertEquals(0.5, domain.getValue(0).asDouble());
-
+		assertEquals(0.5, domain.get(0).asDouble());
 	}
 }

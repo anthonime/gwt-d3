@@ -149,8 +149,12 @@ public class Selection extends EnteringSelection {
 	 * Sets the attribute with the specified name to the specified
 	 * {@link PathDataGenerator} value on all selected elements.
 	 * <p>
+<<<<<<< HEAD
 	 * This method should always been used with a selection containing a svg
 	 * &lt;path&gt; element by specifying "d" for the name argument.
+=======
+	 * This method should always been used with a selection containing a svg &lt;path&gt; element by specifying "d" for the name argument.
+>>>>>>> colorpalette
 	 * <p>
 	 * The specified name may have a namespace prefix, such as xlink:href, to
 	 * specify an "href" attribute in the XLink namespace. By default, D3

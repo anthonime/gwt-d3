@@ -97,16 +97,16 @@ public class TestTimeIntervals extends AbstractTestCase {
 		double stop = start + (5 * period);
 		Array<JsDate> result = interval.range(JsDate.create(start), JsDate.create(stop));
 		assertEquals(5, result.length());
-		assertEquals((double) base + (1 * period), result.get(0).getTime());
-		assertEquals((double) base + (2 * period), result.get(1).getTime());
-		assertEquals((double) base + (3 * period), result.get(2).getTime());
-		assertEquals((double) base + (4 * period), result.get(3).getTime());
-		assertEquals((double) base + (5 * period), result.get(4).getTime());
+		assertEquals((double) base + (1 * period), result.getObject(0).getTime());
+		assertEquals((double) base + (2 * period), result.getObject(1).getTime());
+		assertEquals((double) base + (3 * period), result.getObject(2).getTime());
+		assertEquals((double) base + (4 * period), result.getObject(3).getTime());
+		assertEquals((double) base + (5 * period), result.getObject(4).getTime());
 
 		result = interval.range(JsDate.create(start), JsDate.create(stop), 2);
-		assertEquals((double) base + (2 * period), result.get(0).getTime());
-		assertEquals((double) base + (4 * period), result.get(1).getTime());
-		assertEquals((double) base + (5 * period), result.get(2).getTime());
+		assertEquals((double) base + (2 * period), result.getObject(0).getTime());
+		assertEquals((double) base + (4 * period), result.getObject(1).getTime());
+		assertEquals((double) base + (5 * period), result.getObject(2).getTime());
 		assertEquals(3, result.length());
 
 	}

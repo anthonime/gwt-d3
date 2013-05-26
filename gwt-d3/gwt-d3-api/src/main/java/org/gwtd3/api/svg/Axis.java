@@ -5,6 +5,7 @@ package org.gwtd3.api.svg;
 
 import org.gwtd3.api.IsFunction;
 import org.gwtd3.api.arrays.Array;
+import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.core.Formatter;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.functions.DatumFunction;
