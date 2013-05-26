@@ -29,6 +29,7 @@ public class ColorPalette extends FlowPanel implements DemoCase {
 	}
 
 	private void init() {
+
 		ComponentSelector hue = new HueSelector();
 		add(hue);
 		final SaturationSelector saturation = new SaturationSelector();

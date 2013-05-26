@@ -116,17 +116,9 @@ public class Value extends JavaScriptObject {
 		return this.datum;
 	}-*/;
 
-	/**
-	 * Cast and return the value.
-	 * 
-	 * @param clazz
-	 *            the clazz to cast to
-	 * @return the casted instance
-	 */
-	@SuppressWarnings("unchecked")
-	public final <T> T as(final Class<T> clazz) {
-		return (T) as();
-	}
+	public final native <T> T as(Class<T> c)/*-{
+		return this.datum;
+	}-*/;
 
 	/**
 	 * 

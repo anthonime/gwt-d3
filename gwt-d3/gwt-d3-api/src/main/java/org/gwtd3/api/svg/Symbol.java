@@ -9,7 +9,7 @@ import org.gwtd3.api.functions.DatumFunction;
  * A {@link PathDataGenerator} generating symbols shapes.
  * <p>
  * While the default accessors generate static symbols, it is common to set one or more of the accessors using a function, such as setting the size proportional to a dimension of
- * data for a scatterplot. The returned function generates path data for various symbols (see {@link Type} for all the symbols).
+ * data for a scatterplot. The returned function generates path data for various symbols (see {@link DragEventType} for all the symbols).
  * <p>
  * Note that the symbol does not include accessors for x and y. Instead, you can use the path element's transform attribute to position the symbols, as in:
  * 
@@ -94,9 +94,9 @@ public class Symbol extends PathDataGenerator {
 	}
 
 	/**
-	 * Set the type of the symbol using the specified {@link Type} constant.
+	 * Set the type of the symbol using the specified {@link DragEventType} constant.
 	 * <p>
-	 * The default type is {@link Type#CIRCLE}.
+	 * The default type is {@link DragEventType#CIRCLE}.
 	 * 
 	 * 
 	 * 
@@ -108,11 +108,11 @@ public class Symbol extends PathDataGenerator {
 	}-*/;
 
 	/**
-	 * Set the type of the symbol using the specified function returning a Type.
+	 * Set the type of the symbol using the specified function returning a DragEventType.
 	 * <p>
 	 * 
 	 * @param typeAccessorFunction
-	 *            the function that return the {@link Type} of symbol.
+	 *            the function that return the {@link DragEventType} of symbol.
 	 * @return this instance for chaining
 	 */
 	public native final Symbol type(DatumFunction<Type> typeAccessorFunction)/*-{
@@ -140,7 +140,7 @@ public class Symbol extends PathDataGenerator {
 	 * <p>
 	 * 
 	 * @param sizeAccessorFunction
-	 *            the function that return the {@link Type} of symbol.
+	 *            the function that return the {@link DragEventType} of symbol.
 	 * @return this instance for chaining
 	 */
 	public native final Symbol size(DatumFunction<Integer> sizeAccessorFunction)/*-{

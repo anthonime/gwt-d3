@@ -3,11 +3,23 @@
  */
 package org.gwtd3.demo.client.ui.colors;
 
+import org.gwtd3.api.D3;
 import org.gwtd3.api.core.Color;
+import org.gwtd3.api.core.Datum;
 import org.gwtd3.api.core.Selection;
+import org.gwtd3.api.core.UpdatingSelection;
+import org.gwtd3.api.functions.DatumFunction;
+import org.gwtd3.api.scales.Scale;
 import org.gwtd3.demo.client.ui.SVGD3Widget;
 
+import com.google.gwt.dom.client.Element;
+
 /**
+ * Creates a parameterized SVG gradient.
+ * <p>
+ * Gradient works as a number of colors (the steps), each color can be converted into a color at a given offset (in percentage).
+ * 
+ * 
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
  */
@@ -15,6 +27,18 @@ public class GradientBuilder {
 
 	private final SVGD3Widget widget;
 	private Selection gradientSelection;
+	private int steps = 2;
+	private final Scale<?> offsetScale = createOffsetScaleFromSteps();
+
+	private final DatumFunction<String> offsetAccessor = new DatumFunction<String>() {
+		@Override
+		public String apply(final Element context, final Datum d, final int index) {
+			int step = d.asInt();
+			// linearly set the offset
+			// (but you could also use log or other...)
+			return (offsetScale.apply(step)) + "%";
+		}
+	};
 
 	public enum GradientType {
 		LINEAR,
@@ -25,6 +49,26 @@ public class GradientBuilder {
 		pad,
 		repeat,
 		reflect;
+	}
+
+	/**
+	 * Define the number of colors defining the gradient.
+	 * The default value is 2.
+	 * 
+	 * @param steps
+	 * @return
+	 */
+	public GradientBuilder steps(final int steps) {
+		this.steps = steps;
+		return this;
+	}
+
+	/**
+	 * @return a scale appropriate to compute the svg Color stop offset
+	 *         from a step.
+	 */
+	protected Scale<?> createOffsetScaleFromSteps() {
+		return D3.scale.linear().domain(0, steps - 1).range(0, 100);
 	}
 
 	// TODO: gradientTransform (rotate the gradient before applied)
@@ -47,6 +91,22 @@ public class GradientBuilder {
 				.attr("y2", "0%");
 		builder.gradientSelection.selectAll("stop").remove();
 		return builder;
+	}
+
+	public GradientBuilder build(final DatumFunction<Color> colorFunction) {
+
+		UpdatingSelection stopSelection = gradientSelection.selectAll("stop")
+				.data(D3.range(steps));
+		// remove old stops
+		stopSelection.exit().remove();
+		// add new ones
+		stopSelection.enter()
+				.append("stop")
+				.attr("offset", offsetAccessor)
+				.attr("stop-color", colorFunction)
+				.attr("stop-opacity", 1.0);
+
+		return this;
 	}
 
 	public static GradientBuilder createVerticalLinearGradient(final SVGD3Widget widget, final String gradientId) {

@@ -65,10 +65,10 @@ public class BarChart extends FlowPanel implements DemoCase {
 
 		final Format formatPercent = D3.format(".0%");
 
-		final OrdinalScale x = D3.scale().ordinal()
+		final OrdinalScale x = D3.scale.ordinal()
 				.rangeRoundBands(JsArrays.asJsArray(0, width), .1);
 
-		final LinearScale y = D3.scale().linear()
+		final LinearScale y = D3.scale.linear()
 				.range(JsArrays.asJsArray(height, 0));
 
 		final Axis xAxis = D3.svg().axis().scale(x).orient(Orientation.BOTTOM);

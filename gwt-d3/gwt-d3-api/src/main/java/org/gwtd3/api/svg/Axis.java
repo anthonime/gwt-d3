@@ -4,9 +4,9 @@
 package org.gwtd3.api.svg;
 
 import org.gwtd3.api.IsFunction;
+import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.core.Format;
 import org.gwtd3.api.core.Selection;
-import org.gwtd3.api.core.Values;
 import org.gwtd3.api.scales.Scale;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -19,7 +19,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 /**
  * @author citaire
- *
+ * 
  */
 public class Axis extends JavaScriptObject implements IsFunction {
 
@@ -103,7 +103,7 @@ public class Axis extends JavaScriptObject implements IsFunction {
 	 * @param count
 	 * @return
 	 */
-	public final native Values ticks()/*-{
+	public final native Array ticks()/*-{
 		return this.ticks();
 	}-*/;
 
@@ -293,7 +293,8 @@ public class Axis extends JavaScriptObject implements IsFunction {
 	 * 
 	 * The selection must contain an SVG or G element.
 	 * 
-	 * @param javaScriptObject the selection to apply the axis to
+	 * @param javaScriptObject
+	 *            the selection to apply the axis to
 	 * @return the current axis.
 	 */
 	public final native Axis apply(Selection selection) /*-{
@@ -303,7 +304,8 @@ public class Axis extends JavaScriptObject implements IsFunction {
 	/**
 	 * Override the tick formatting for labels.
 	 * 
-	 * @param format the tick value formatter for labels.
+	 * @param format
+	 *            the tick value formatter for labels.
 	 * @return the current axis.
 	 */
 	public final native Axis tickFormat(Format format) /*-{

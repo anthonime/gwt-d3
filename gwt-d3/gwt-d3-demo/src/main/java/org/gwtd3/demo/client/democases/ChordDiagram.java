@@ -60,7 +60,7 @@ public class ChordDiagram extends FlowPanel implements DemoCase {
 		double innerRadius = Math.min(width, height) * .41;
 		final double outerRadius = innerRadius * 1.1;
 
-		final OrdinalScale fill = D3.scale().ordinal()
+		final OrdinalScale fill = D3.scale.ordinal()
 				.domain(D3.range(4))
 				.range(JsArrays.asJsArray("#000000", "#FFDD89", "#957244", "#F26223"));
 
@@ -177,7 +177,7 @@ public class ChordDiagram extends FlowPanel implements DemoCase {
 				svg.selectAll("." + css.chord() + " path").<Array<Chord>> cast()
 						.filter(new ForEachCallback<Boolean>() {
 							@Override
-							public Boolean forEach(Object thisArg, Value v, int index, Array<Value> array) {
+							public Boolean forEach(final Object thisArg, final Value v, final int index, final Array<Value> array) {
 								return (v.as(Chord.class).source().index() != i) && (v.as(Chord.class).target().index() != i);
 							}
 						}).<Selection> cast()

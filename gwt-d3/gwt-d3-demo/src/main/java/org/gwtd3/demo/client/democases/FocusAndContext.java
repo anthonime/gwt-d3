@@ -72,9 +72,9 @@ public class FocusAndContext extends FlowPanel implements DemoCase {
 				.range(JsArrays.asJsArray(0, width));
 		final TimeScale x2 = D3.time().scale()
 				.range(JsArrays.asJsArray(0, width));
-		final LinearScale y = D3.scale().linear()
+		final LinearScale y = D3.scale.linear()
 				.range(JsArrays.asJsArray(height, 0));
-		final LinearScale y2 = D3.scale().linear()
+		final LinearScale y2 = D3.scale.linear()
 				.range(JsArrays.asJsArray(height2, 0));
 
 		final Axis xAxis = D3.svg().axis().scale(x).orient(Orientation.BOTTOM);

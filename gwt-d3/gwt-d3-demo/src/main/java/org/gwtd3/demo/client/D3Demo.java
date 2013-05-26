@@ -12,6 +12,8 @@ import org.gwtd3.demo.client.democases.GeneralUpdatePattern3;
 import org.gwtd3.demo.client.democases.StupidExample;
 import org.gwtd3.demo.client.democases.StupidExample2;
 import org.gwtd3.demo.client.democases.arcs.ArcDemo;
+import org.gwtd3.demo.client.democases.behaviors.DragMultiples;
+import org.gwtd3.demo.client.democases.colors.ColorPalette;
 import org.gwtd3.demo.client.test.ui.TestRunner;
 import org.gwtd3.demo.client.test.ui.TestSessionContainer;
 import org.gwtd3.demo.client.testcases.D3TestSuite;
@@ -74,6 +76,8 @@ public class D3Demo implements EntryPoint {
 		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext.factory()));
 		buttonContainer.add(new DemoButton("Bar chart", BarChart.factory()));
 		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram.factory()));
+		buttonContainer.add(new DemoButton("Drag Multiples", DragMultiples.factory()));
+		buttonContainer.add(new DemoButton("ColorPalette", ColorPalette.factory()));
 		p.add(buttonContainer);
 		container.addWest(p, 200);
 
