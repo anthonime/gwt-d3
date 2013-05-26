@@ -1,9 +1,10 @@
 package org.gwtd3.api.scales;
 
-import org.gwtd3.api.core.Values;
+import org.gwtd3.api.arrays.Array;
 
-public class Domain extends Values {
+public class Domain extends Array {
 
-    protected Domain() {}
+	protected Domain() {
+	}
 
 }

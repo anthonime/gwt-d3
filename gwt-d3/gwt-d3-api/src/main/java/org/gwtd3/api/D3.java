@@ -6,6 +6,9 @@ package org.gwtd3.api;
 import java.util.Collections;
 import java.util.List;
 
+import org.gwtd3.api.arrays.Array;
+import org.gwtd3.api.behaviour.Behavior;
+import org.gwtd3.api.behaviour.Drag;
 import org.gwtd3.api.core.Format;
 import org.gwtd3.api.core.HSLColor;
 import org.gwtd3.api.core.NumericAccessor;
@@ -20,7 +23,6 @@ import org.gwtd3.api.interpolators.Interpolator;
 import org.gwtd3.api.interpolators.JavascriptFunctionInterpolator;
 import org.gwtd3.api.interpolators.JavascriptFunctionInterpolatorDecorator;
 import org.gwtd3.api.layout.Layout;
-import org.gwtd3.api.scales.Scale;
 import org.gwtd3.api.svg.SVG;
 import org.gwtd3.api.time.Time;
 
@@ -43,6 +45,12 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public class D3 extends JavaScriptObject {
+
+	// =========== scales ==============
+	/**
+	 * The scale factory module.
+	 */
+	public static final Scales scale = Scales.get();
 
 	protected D3() {
 	}
@@ -235,14 +243,6 @@ public class D3 extends JavaScriptObject {
 		return $wnd.d3.svg;
 	}-*/;
 
-	// =========== scales ==============
-	/**
-	 * @return the scale module
-	 */
-	public static final native Scale<?> scale()/*-{
-		return $wnd.d3.scale;
-	}-*/;
-
 	// =========== layouts ==============
 	/**
 	 * @return the layout module
@@ -383,7 +383,7 @@ public class D3 extends JavaScriptObject {
 
 	// ========= events and interactions ============
 	/**
-	 * Stores the current event, if any.
+	 * Retrieve the current event, if any.
 	 * <p>
 	 * This global variable exists during an event listener callback registered with the on operator. The current event is reset after the listener is notified in a finally block.
 	 * This allows the listener function to have the same form as other operator functions, being passed the current datum d and index i.
@@ -398,6 +398,16 @@ public class D3 extends JavaScriptObject {
 	 * @return
 	 */
 	public static final native Event event()/*-{
+		return $wnd.d3.event;
+	}-*/;
+
+	/**
+	 * Retrieve the current event if any, as a {@link Coords} object.
+	 * This is useful when using {@link Drag} behavior.
+	 * 
+	 * @return the current event as a Coords object
+	 */
+	public static final native Coords eventAsCoords()/*-{
 		return $wnd.d3.event;
 	}-*/;
 
@@ -655,25 +665,34 @@ public class D3 extends JavaScriptObject {
 	}-*/;
 
 	/**
-	 * Generate a range of numeric values.
+	 * Generate a range of <code>stop-1</code> numeric values,
+	 * stored in an array, going from 0 to stop (excluded).
 	 * 
 	 * @see D3#range(double, double, double)
 	 * @param stop
-	 * @return
+	 *            the maximum value (excluded)
+	 * @return the array
 	 */
-	public static final native JavaScriptObject range(double stop) /*-{
+	public static final native Array<Integer> range(double stop) /*-{
 		return $wnd.d3.range(stop);
 	}-*/;
 
 	/**
-	 * Generate a range of numeric values.
+	 * Generate a range of numeric values,
+	 * stored in an array, going from 0 to stop (exluded),
+	 * separated by step (>0).
+	 * <p>
+	 * For instance, range(10, 3) would produce the array [0,3,6,9].
+	 * 
 	 * 
 	 * @see D3#range(double, double, double)
 	 * @param stop
+	 *            the maximum value (excluded)
 	 * @param step
-	 * @return
+	 *            the step between each value
+	 * @return the array
 	 */
-	public static final native JavaScriptObject range(double stop, double step) /*-{
+	public static final native Array range(double stop, double step) /*-{
 		return $wnd.d3.range(stop, step);
 	}-*/;
 
@@ -688,12 +707,36 @@ public class D3 extends JavaScriptObject {
 	 * than causing an infinite loop.
 	 * 
 	 * @param start
+	 *            the first value-
 	 * @param stop
+	 *            the maximum value (excluded)
 	 * @param step
+	 *            the step between each value
 	 * @return
 	 */
 	public static final native JavaScriptObject range(double start, double stop, double step) /*-{
 		return $wnd.d3.range(start, stop, step);
+	}-*/;
+
+	// =========== behaviours ==============
+	/**
+	 * @return the behaviour module
+	 */
+	public static final native Behavior behavior()/*-{
+		return $wnd.d3.behavior;
+	}-*/;
+
+	/**
+	 * Return the identity function:
+	 * <p>
+	 * <code>function(d) { return d; }</code>
+	 * 
+	 * @return the identity function
+	 */
+	public static final native JavaScriptObject identity()/*-{
+		return function(d) {
+			return d;
+		};
 	}-*/;
 
 }

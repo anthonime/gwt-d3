@@ -97,12 +97,11 @@ public class Selection extends EnteringSelection {
 	/*-{
 		return this.attr(name, value);
 	}-*/;
-	
+
 	/**
 	 * Sets the attribute with the specified name to the specified {@link PathDataGenerator} value on all selected elements.
 	 * <p>
-	 * This method should always been used with a selection containing a svg &lt;path&gt; element
-	 * by specifying "d" for the name argument. 
+	 * This method should always been used with a selection containing a svg &lt;path&gt; element by specifying "d" for the name argument.
 	 * <p>
 	 * The specified name may have a namespace prefix, such as xlink:href, to specify an "href" attribute in the XLink namespace. By default, D3 supports svg, xhtml, xlink, xml,
 	 * and xmlns namespaces. Additional namespaces can be registered by adding to d3.ns.prefix.
@@ -118,29 +117,29 @@ public class Selection extends EnteringSelection {
 	/*-{
 		return this.attr(name, value);
 	}-*/;
-	
 
-/**
+	/**
 	 * See {@link #attr(String, String)}.
+	 * 
 	 * @param name
 	 * @param value
 	 * @return
 	 */
 	public native final Selection attr(final String name, double value)
 	/*-{
-	return this.attr(name, value);
-}-*/;
+		return this.attr(name, value);
+	}-*/;
 
-
-/**
+	/**
 	 * See {@link #attr(String, String)}.
+	 * 
 	 * @param name
 	 * @param value
 	 * @return
 	 */
 	public native final <T> Selection attr(final String name, boolean value)/*-{
-	return this.attr(name, value);
-}-*/;
+		return this.attr(name, value);
+	}-*/;
 
 	/**
 	 * Sets the attribute with the specified name to the value returned by the specified function on all selected
@@ -401,10 +400,11 @@ public class Selection extends EnteringSelection {
 	 * @return
 	 */
 	public native final Selection on(String eventType, DatumFunction<Void> listener) /*-{
-		listener == null ? null: function(d, i) {
-			listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
-		};
-		return this.on(eventType,l);
+		var l = listener == null ? null
+				: function(d, i) {
+					listener.@org.gwtd3.api.functions.DatumFunction::apply(Lcom/google/gwt/dom/client/Element;Lorg/gwtd3/api/core/Datum;I)(this,{datum:d},i);
+				};
+		return this.on(eventType, l);
 	}-*/;
 
 	/**

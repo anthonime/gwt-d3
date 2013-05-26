@@ -36,6 +36,9 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>${gwt.version}</version>
+				<configuration>
+					<strict>true</strict>
+				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>com.google.gwt</groupId>

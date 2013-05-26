@@ -4,6 +4,8 @@
 package org.gwtd3.demo.client.ui.colors;
 
 import org.gwtd3.api.D3;
+import org.gwtd3.api.behaviour.Drag;
+import org.gwtd3.api.behaviour.Drag.DragEventType;
 import org.gwtd3.api.core.Color;
 import org.gwtd3.api.core.Datum;
 import org.gwtd3.api.core.Selection;
@@ -12,14 +14,12 @@ import org.gwtd3.api.svg.Symbol;
 import org.gwtd3.api.svg.Symbol.Type;
 import org.gwtd3.demo.client.ui.SVGD3Widget;
 
-import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasValue;
 
 /**
@@ -63,16 +63,6 @@ public abstract class ComponentSelector extends SVGD3Widget implements HasValue<
 	private void init() {
 		symbol = D3.svg().symbol().type(Type.TRIANGLE_UP);
 
-		// text = selection().append("div").text("number of steps:?");
-		// text.on(BrowserEvents.CLICK, new DatumFunction<Void>() {
-		// @Override
-		// public Void apply(final Element context, final Datum d, final int index) {
-		// createGradient(--steps);
-		// return null;
-		// }
-		// });
-		// selectedValueText = selection().append("div").text(getSelectedValueText());
-
 		rectangleSelector = g().append("rect")
 				.attr("x", 0)
 				.attr("y", 0)
@@ -82,70 +72,24 @@ public abstract class ComponentSelector extends SVGD3Widget implements HasValue<
 		rectangleSelector.node().getStyle().setCursor(Cursor.POINTER);
 		rectangleSelector.node().getStyle().setProperty("userSelect", "none");
 		rectangleSelector.node().getStyle().setProperty("webkitUserSelect", "none");
-		rectangleSelector.on(BrowserEvents.MOUSEDOWN, new DatumFunction<Void>() {
-
-			@Override
-			public Void apply(final Element context, final Datum d, final int index) {
-				updateColorFromMouse(rectangleSelector);
-				rectangleSelector.on(BrowserEvents.MOUSEMOVE, new DatumFunction<Void>() {
-					@Override
-					public Void apply(final Element context, final Datum d, final int index) {
-						updateColorFromMouse(rectangleSelector);
-						return null;
-					}
-				}, true);
-				rectangleSelector.on(BrowserEvents.MOUSEUP, new DatumFunction<Void>() {
-					@Override
-					public Void apply(final Element context, final Datum d, final int index) {
-						rectangleSelector.on("." + BrowserEvents.MOUSEMOVE, null);
-						rectangleSelector.on("." + BrowserEvents.MOUSEDOWN, null);
-						return null;
-					}
-				}, true);
-				return null;
-			}
-		});
 
 		componentSymbol = g().append("path")
 				.attr("fill", "blue")
 				.attr("transform", "translate(" + (Integer.parseInt(rectangleSelector.attr("width")) + 4) + "," + 0 + ") rotate(-90)")
 				.attr("d", symbol);
 
-		componentSymbol.on(BrowserEvents.MOUSEDOWN, new DatumFunction<Void>() {
+		Drag dragBehavior = D3.behavior().drag().on(DragEventType.drag, new DatumFunction<Void>() {
 			@Override
 			public Void apply(final Element context, final Datum d, final int index) {
-				dragging = true;
-				System.out.println("capture on");
-				DOM.setCapture((com.google.gwt.user.client.Element) componentSymbol.node().cast());
-
+				updateColorFromMouse(rectangleSelector);
 				return null;
 			}
 		});
+		rectangleSelector.call(dragBehavior);
+		componentSymbol.call(dragBehavior);
 		componentSymbol.node().getStyle().setCursor(Cursor.POINTER);
-		componentSymbol.on(BrowserEvents.MOUSEDOWN, new DatumFunction<Void>() {
-			@Override
-			public Void apply(final Element context, final Datum d, final int index) {
-				dragging = false;
-				DOM.releaseCapture((com.google.gwt.user.client.Element) componentSymbol.node().cast());
-				return null;
-			}
+		componentSymbol.node().getStyle().setCursor(Cursor.POINTER);
 
-		});
-
-		componentSymbol.on(BrowserEvents.MOUSEMOVE, new DatumFunction<Void>() {
-			@Override
-			public Void apply(final Element context, final Datum d, final int index) {
-				if (dragging) {
-					int mouseY = (int) D3.mouseY(rectangleSelector.node());
-					mouseY = Math.min(mouseY, Integer.parseInt(rectangleSelector.attr("height")));
-					mouseY = Math.max(mouseY, 0);
-					double value = yToValue(mouseY);
-					setValue(value, true);
-					position(mouseY);
-				}
-				return null;
-			}
-		});
 		createGradient(getGradientSteps());
 	}
 
