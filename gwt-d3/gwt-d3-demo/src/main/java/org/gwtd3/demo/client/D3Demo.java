@@ -12,6 +12,8 @@ import org.gwtd3.demo.client.democases.GeneralUpdatePattern3;
 import org.gwtd3.demo.client.democases.StupidExample;
 import org.gwtd3.demo.client.democases.StupidExample2;
 import org.gwtd3.demo.client.democases.arcs.ArcDemo;
+
+import org.gwtd3.demo.client.democases.behaviors.DragMultiples;
 import org.gwtd3.demo.client.test.ui.TestRunner;
 import org.gwtd3.demo.client.test.ui.TestSessionContainer;
 import org.gwtd3.demo.client.testcases.D3TestSuite;
@@ -19,6 +21,7 @@ import org.gwtd3.demo.client.testcases.D3TestSuite;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
+import com.google.gwt.debug.client.DebugInfo;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -45,7 +48,7 @@ public class D3Demo implements EntryPoint {
 	 */
 	@Override
 	public void onModuleLoad() {
-
+		DebugInfo.setDebugIdPrefix("");
 		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 			@Override
 			public void onUncaughtException(final Throwable e) {
@@ -74,6 +77,8 @@ public class D3Demo implements EntryPoint {
 		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext.factory()));
 		buttonContainer.add(new DemoButton("Bar chart", BarChart.factory()));
 		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram.factory()));
+
+		buttonContainer.add(new DemoButton("Drag Multiples", DragMultiples.factory()));
 		p.add(buttonContainer);
 		container.addWest(p, 200);
 
@@ -105,7 +110,9 @@ public class D3Demo implements EntryPoint {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt .event.dom.client.ClickEvent)
+		 * @see
+		 * com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt
+		 * .event.dom.client.ClickEvent)
 		 */
 		@Override
 		public void onClick(final ClickEvent event) {
@@ -120,6 +127,7 @@ public class D3Demo implements EntryPoint {
 	}
 
 	public class TestButton extends Button {
+		public static final String ID = "testSuiteButton";
 
 		public TestButton() {
 			super("Test Suite", new ClickHandler() {
@@ -138,6 +146,7 @@ public class D3Demo implements EntryPoint {
 					demoContainer.add(testContainer);
 				}
 			});
+			ensureDebugId(ID);
 		}
 	}
 
@@ -146,8 +155,7 @@ public class D3Demo implements EntryPoint {
 			currentDemo.stop();
 			demoContainer.remove(currentDemo);
 			currentDemo = null;
-		}
-		else if ((testContainer != null) && testContainer.getParent().equals(demoContainer)) {
+		} else if ((testContainer != null) && testContainer.getParent().equals(demoContainer)) {
 			demoContainer.remove(testContainer);
 		}
 

@@ -10,6 +10,12 @@ import org.gwtd3.demo.client.test.AbstractTestCase;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
+/**
+ * Test native array functions.
+ * 
+ * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
+ * 
+ */
 public class TestArrays extends AbstractTestCase {
 
 	@Override
@@ -43,14 +49,14 @@ public class TestArrays extends AbstractTestCase {
 		Array<Integer> fruits = Array.create(5, 20, 31);
 		Array<String> result = fruits.map(new ForEachCallback<String>() {
 			@Override
-			public String forEach(final Object thisArg, final Value element, final int index, final Array<Value> array) {
+			public String forEach(final Object thisArg, final Value element, final int index, final Array<?> array) {
 				return Integer.toHexString(element.asInt());
 			}
 		});
 		assertEquals(3, result.length());
-		assertEquals("5", result.get(0));
-		assertEquals("14", result.get(1));
-		assertEquals("1f", result.get(2));
+		assertEquals("5", result.getString(0));
+		assertEquals("14", result.getString(1));
+		assertEquals("1f", result.getString(2));
 	}
 
 	private void testSome() {
@@ -113,11 +119,11 @@ public class TestArrays extends AbstractTestCase {
 	private void testSlice() {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple", "Mango", "Orange", "Lemon"));
 		Array<String> slicedFruits = fruits.slice(4);
-		assertEquals("Orange", slicedFruits.get(0));
-		assertEquals("Lemon", slicedFruits.get(1));
+		assertEquals("Orange", slicedFruits.getString(0));
+		assertEquals("Lemon", slicedFruits.getString(1));
 		slicedFruits = fruits.slice(3, 5);
-		assertEquals("Mango", slicedFruits.get(0));
-		assertEquals("Orange", slicedFruits.get(1));
+		assertEquals("Mango", slicedFruits.getString(0));
+		assertEquals("Orange", slicedFruits.getString(1));
 	}
 
 	private void testShift() {
@@ -130,9 +136,9 @@ public class TestArrays extends AbstractTestCase {
 	private void testReverse() {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple"));
 		Array<String> fruits2 = fruits.reverse();
-		assertEquals("Apple", fruits2.get(0));
-		assertEquals("Orange", fruits2.get(1));
-		assertEquals("Banana", fruits2.get(2));
+		assertEquals("Apple", fruits2.getString(0));
+		assertEquals("Orange", fruits2.getString(1));
+		assertEquals("Banana", fruits2.getString(2));
 	}
 
 	private void testPush() {
@@ -152,7 +158,7 @@ public class TestArrays extends AbstractTestCase {
 		Array<String> fruits = Array.create(Arrays.asList("Banana", "Orange", "Apple", "Mango", "Orange", "Lemon"));
 		fruits.set(0, "Other");
 		assertEquals(6, fruits.length());
-		assertEquals("Other", fruits.get(0));
+		assertEquals("Other", fruits.getString(0));
 	}
 
 	private void testLength() {
@@ -177,7 +183,7 @@ public class TestArrays extends AbstractTestCase {
 		assertEquals(true, fruits.getBoolean(0));
 		assertEquals(5.6, fruits.getNumber(1));
 		assertEquals("Apple", fruits.getString(2));
-		assertEquals(obj, fruits.get(3));
+		assertEquals(obj, fruits.getObject(3));
 		assertEquals(obj, fruits.getObject(3));
 	}
 
@@ -212,8 +218,8 @@ public class TestArrays extends AbstractTestCase {
 		Array<Integer> filteredArray = array.filter(Callbacks.greaterThan(10));
 		assertNotNull(filteredArray);
 		assertEquals(2, filteredArray.length());
-		assertEquals(20, filteredArray.get(0).intValue());
-		assertEquals(72, filteredArray.get(1).intValue());
+		assertEquals(20, filteredArray.getValue(0).asInt());
+		assertEquals(72, filteredArray.getValue(1).asInt());
 	}
 
 	private void testForEach() {
@@ -221,7 +227,7 @@ public class TestArrays extends AbstractTestCase {
 
 		ForEachCallback<Void> callback = new ForEachCallback<Void>() {
 			@Override
-			public Void forEach(final Object thisArg, final Value element, final int index, final Array<Value> array) {
+			public Void forEach(final Object thisArg, final Value element, final int index, final Array<?> array) {
 				Person person = element.as(Person.class);
 				person.setAge(person.getAge() + 1);
 				return null;
@@ -229,9 +235,9 @@ public class TestArrays extends AbstractTestCase {
 		};
 		array.forEach(callback);
 
-		Person jane = array.get(0);
-		Person peter = array.get(1);
-		Person sam = array.get(2);
+		Person jane = array.getObject(0);
+		Person peter = array.getObject(1);
+		Person sam = array.getObject(2);
 
 		assertEquals(26, jane.getAge());
 		assertEquals(37, peter.getAge());

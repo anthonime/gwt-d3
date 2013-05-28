@@ -4,8 +4,8 @@ import org.gwtd3.api.D3;
 import org.gwtd3.api.JsArrays;
 import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
+import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Datum;
-import org.gwtd3.api.core.NumericAccessor;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.core.Value;
 import org.gwtd3.api.dsv.DsvCallback;
@@ -72,9 +72,9 @@ public class FocusAndContext extends FlowPanel implements DemoCase {
 				.range(JsArrays.asJsArray(0, width));
 		final TimeScale x2 = D3.time().scale()
 				.range(JsArrays.asJsArray(0, width));
-		final LinearScale y = D3.scale().linear()
+		final LinearScale y = D3.scale.linear()
 				.range(JsArrays.asJsArray(height, 0));
-		final LinearScale y2 = D3.scale().linear()
+		final LinearScale y2 = D3.scale.linear()
 				.range(JsArrays.asJsArray(height2, 0));
 
 		final Axis xAxis = D3.svg().axis().scale(x).orient(Orientation.BOTTOM);
@@ -133,30 +133,32 @@ public class FocusAndContext extends FlowPanel implements DemoCase {
 			}
 		});
 
-		D3.csv("demo-data/sp500.csv", new DsvObjectAccessor<Data>() {
-			@Override
-			public Data apply(final DsvRow row, final int index) {
-				return new Data(dateFormat.parse(row.get("date").asString()), row.get("price").asDouble());
-			}
-		}, new DsvCallback<Data>() {
-			@Override
-			public void get(final JavaScriptObject error, final DsvRows<Data> data) {
-				x.domain(D3.extent(data
-						.map(new ForEachCallback<JsDate>() {
-							@Override
-							public JsDate forEach(final Object thisArg, final Value d, final int index,
-									final Array<Value> array) {
-								return d.as(Data.class).getDate();
-							}
-						})));
-				y.domain(JsArrays.asJsArray(0, D3.max(data, new NumericAccessor<Data>() {
-					@Override
-					public double apply(final Data d) {
-						return d.getPrice();
-					}
-				})));
-				x2.domain(x.domain());
-				y2.domain(y.domain());
+        D3.csv("demo-data/sp500.csv", new DsvObjectAccessor<Data>() {
+            @Override
+            public Data apply(final DsvRow row, final int index) {
+                return new Data(dateFormat.parse(row.get("date").asString()), row.get("price").asDouble());
+            }
+        }, new DsvCallback<Data>() {
+            @Override
+            public void get(final JavaScriptObject error, final DsvRows<Data> data) {
+                x.domain(D3.extent(data
+                        .map(new ForEachCallback<JsDate>() {
+                            @Override
+                            public JsDate forEach(final Object thisArg, final Value d, final int index,
+                                    final Array<?> array) {
+                                return d.as(Data.class).getDate();
+                            }
+                        })));
+                y.domain(JsArrays.asJsArray(0, D3.max(data,
+                        new NumericForEachCallback() {
+                            @Override
+                            public double forEach(final Object thisArg, final Value d, final int index,
+                                    final Array<?> array) {
+                                return d.as(Data.class).getPrice();
+                            }
+                        }).asInt()));
+                x2.domain(x.domain());
+                y2.domain(y.domain());
 
 				focus.append("path").datum(data)
 						.attr("clip-path", "url(#clip)").attr("d", area);

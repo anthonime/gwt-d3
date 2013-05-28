@@ -90,4 +90,158 @@ public class Time extends JavaScriptObject {
 		return this.scale();
 	}-*/;
 
+	// ================== Intervals ====================
+
+	/**
+	 * Factory for interval of Seconds (e.g., 01:23:45.0000 AM). Always 1,000
+	 * milliseconds long.
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval second()/*-{
+		return this.second;
+	}-*/;
+
+	/**
+	 * Factory for interval of Minutes (e.g., 01:02:00 AM). Most browsers do not
+	 * support leap seconds, so minutes are almost always 60 seconds (6e4
+	 * milliseconds) long.
+	 * 
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval minute()/*-{
+		return this.minute;
+	}-*/;
+
+	/**
+	 * Factory for interval of Hours (e.g., 01:00 AM). 60 minutes long (36e5
+	 * milliseconds). Note that advancing time by one hour can return the same
+	 * hour number, or skip an hour number, due to Daylight Savings Time.
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval hour()/*-{
+		return this.hour;
+	}-*/;
+
+	/**
+	 * Days (e.g., February 7, 2012 at 12:00 AM). Most days are 24 hours long
+	 * (864e5 milliseconds); however, with Daylight Savings Time, a day may be
+	 * 23 or 25 hours long.
+	 * 
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval day()/*-{
+		return this.day;
+	}-*/;
+
+	/**
+	 * Alias for {@link #sunday}. A week is always 7 days, but ranges between
+	 * 167 and 169 hours depending on Daylight Savings Time.
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval week()/*-{
+		return this.week;
+	}-*/;
+
+	/**
+	 * Sunday-based weeks (e.g., February 5, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval sunday()/*-{
+		return this.sunday;
+	}-*/;
+
+	/**
+	 * Monday-based weeks (e.g., February 6, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval monday()/*-{
+		return this.monday;
+	}-*/;
+
+	/**
+	 * Tueday-based weeks (e.g., February 7, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval tueday()/*-{
+		return this.tueday;
+	}-*/;
+
+	/**
+	 * Wednesday-based weeks (e.g., February 8, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval wednesday()/*-{
+		return this.wednesday;
+	}-*/;
+
+	/**
+	 * Thursday-based weeks (e.g., February 9, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval thursday()/*-{
+		return this.thursday;
+	}-*/;
+
+	/**
+	 * Friday-based weeks (e.g., February 10, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval friday()/*-{
+		return this.friday;
+	}-*/;
+
+	/**
+	 * Saturday-based weeks (e.g., February 11, 2012 at 12:00 AM).
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval saturday()/*-{
+		return this.saturday;
+	}-*/;
+
+	/**
+	 * Months (e.g., February 1, 2012 at 12:00 AM). Ranges between 28 and 31
+	 * days.
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval month()/*-{
+		return this.month;
+	}-*/;
+
+	/**
+	 * Years (e.g., January 1, 2012 at 12:00 AM). Normal years are 365 days
+	 * long; leap years are 366.
+	 * <p>
+	 * 
+	 * @return the {@link Interval}
+	 */
+	public final native Interval year()/*-{
+		return this.year;
+	}-*/;
+
 }

@@ -3,7 +3,6 @@
  */
 package org.gwtd3.api.core;
 
-
 /**
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
@@ -24,19 +23,21 @@ public class HSLColor extends Color {
 	/**
 	 * @return the saturation component in the range [0;1]
 	 */
-	public native final int s()/*-{
+	public native final double s()/*-{
 		return this.s;
 	}-*/;
 
 	/**
 	 * @return the lightness component in the range [0;1]
 	 */
-	public native final int l()/*-{
+	public native final double l()/*-{
 		return this.l;
 	}-*/;
 
 	/**
-	 * Returns the equivalent color in RGB space; see d3.rgb for details on the returned object. The conversion from HSL to RGB is described in CSS3 Color Module Level 3.
+	 * Returns the equivalent color in RGB space; see d3.rgb for details on the
+	 * returned object. The conversion from HSL to RGB is described in CSS3
+	 * Color Module Level 3.
 	 * 
 	 * @return
 	 */

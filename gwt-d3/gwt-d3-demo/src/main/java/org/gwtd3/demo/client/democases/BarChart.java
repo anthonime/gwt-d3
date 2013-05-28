@@ -4,9 +4,9 @@ import org.gwtd3.api.D3;
 import org.gwtd3.api.JsArrays;
 import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
+import org.gwtd3.api.arrays.NumericForEachCallback;
 import org.gwtd3.api.core.Datum;
-import org.gwtd3.api.core.Format;
-import org.gwtd3.api.core.NumericAccessor;
+import org.gwtd3.api.core.Formatter;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.core.Value;
 import org.gwtd3.api.dsv.DsvCallback;
@@ -63,12 +63,12 @@ public class BarChart extends FlowPanel implements DemoCase {
 		final int width = 960 - margin.left - margin.right;
 		final int height = 500 - margin.top - margin.bottom;
 
-		final Format formatPercent = D3.format(".0%");
+        final Formatter formatPercent = D3.format(".0%");
 
-		final OrdinalScale x = D3.scale().ordinal()
+		final OrdinalScale x = D3.scale.ordinal()
 				.rangeRoundBands(JsArrays.asJsArray(0, width), .1);
 
-		final LinearScale y = D3.scale().linear()
+		final LinearScale y = D3.scale.linear()
 				.range(JsArrays.asJsArray(height, 0));
 
 		final Axis xAxis = D3.svg().axis().scale(x).orient(Orientation.BOTTOM);
@@ -85,28 +85,30 @@ public class BarChart extends FlowPanel implements DemoCase {
 				.attr("transform",
 						"translate(" + margin.left + "," + margin.top + ")");
 
-		D3.tsv("demo-data/data.tsv", new DsvObjectAccessor<Data>() {
-			@Override
-			public Data apply(final DsvRow row, final int index) {
-				return new Data(row.get("letter").asString(), row.get(
-						"frequency").asDouble());
-			}
-		}, new DsvCallback<Data>() {
-			@Override
-			public void get(final JavaScriptObject error, final DsvRows<Data> data) {
-				x.domain(data.map(new ForEachCallback<String>() {
-					@Override
-					public String forEach(final Object thisArg, final Value element, final int index, final Array<Value> array) {
-						return element.as(Data.class).getLetter();
-					}
-				}));
-				y.domain(JsArrays.asJsArray(0,
-						D3.max(data, new NumericAccessor<Data>() {
-							@Override
-							public double apply(final Data o) {
-								return o.getFrequency();
-							}
-						})));
+        D3.tsv("demo-data/data.tsv", new DsvObjectAccessor<Data>() {
+            @Override
+            public Data apply(final DsvRow row, final int index) {
+                return new Data(row.get("letter").asString(), row.get(
+                        "frequency").asDouble());
+            }
+        }, new DsvCallback<Data>() {
+            @Override
+            public void get(final JavaScriptObject error, final DsvRows<Data> data) {
+                x.domain(data.map(new ForEachCallback<String>() {
+                    @Override
+                    public String forEach(final Object thisArg, final Value element, final int index,
+                            final Array<?> array) {
+                        return element.as(Data.class).getLetter();
+                    }
+                }));
+                y.domain(JsArrays.asJsArray(0,
+                        D3.max(data, new NumericForEachCallback() {
+                            @Override
+                            public double forEach(final Object thisArg, final Value element, final int index,
+                                    final Array<?> array) {
+                                return element.as(Data.class).getFrequency();
+                            }
+                        }).asDouble()));
 
 				svg.append("g").attr("class", css.x() + " " + css.axis())
 						.attr("transform", "translate(0," + height + ")")

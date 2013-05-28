@@ -22,7 +22,7 @@
 					<g:Button ui:field="runButton" addStyleNames="{style.inline}">Run</g:Button>
 					<g:Button ui:field="stopButton" addStyleNames="{style.inline}">Stop</g:Button>
 				</g:FlowPanel>
-				<g:FlowPanel ui:field="testCaseContainer"   width="100%" height="900px"/>
+				<g:FlowPanel ui:field="testCaseContainer"   width="100%"/>
 			</g:HeaderPanel>
 			<g:AbsolutePanel ui:field="sandbox" width="50%" height="900px" addStyleNames="{style.inline}"/>
 		</g:FlowPanel>

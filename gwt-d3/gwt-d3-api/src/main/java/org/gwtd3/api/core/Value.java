@@ -3,6 +3,10 @@ package org.gwtd3.api.core;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
 
+/**
+ * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
+ * 
+ */
 public class Value extends JavaScriptObject {
 
 	protected Value() {
@@ -94,12 +98,12 @@ public class Value extends JavaScriptObject {
 		return ~~this.datum;
 	}-*/;
 
-	/**
-	 * Return the value casted to a String.
-	 * 
-	 * @return the datum
-	 */
-	public final native String asString()/*-{
+    /**
+     * Return the value casted to a String.
+     * 
+     * @return the datum
+     */
+    public final native String asString()/*-{
 		return this.datum == null ? null : new String(this.datum);
 	}-*/;
 
@@ -116,32 +120,33 @@ public class Value extends JavaScriptObject {
 		return this.datum;
 	}-*/;
 
-	/**
-	 * Cast and return the value.
-	 * 
-	 * @param clazz
-	 *            the clazz to cast to
-	 * @return the casted instance
-	 */
-	@SuppressWarnings("unchecked")
-	public final <T> T as(final Class<T> clazz) {
-		return (T) as();
-	}
 
-	/**
-	 * 
-	 * @return true if the value is not undefined in the Javascript sense
-	 * 
-	 */
-	public final native boolean isDefined()/*-{
-		return !(this.datum === undefined)
+    /**
+     * Cast and return the value.
+     * 
+     * @param clazz
+     *            the clazz to cast to
+     * @return the casted instance
+     */
+    @SuppressWarnings("unchecked")
+    public final <T> T as(final Class<T> clazz) {
+        return (T) as();
+    }
+
+    /**
+     * 
+     * @return true if the value is not undefined in the Javascript sense
+     * 
+     */
+    public final native boolean isDefined()/*-{
+		return typeof (this.datum) != "undefined";
 	}-*/;
 
 	/**
 	 * @return true if the value is undefined in the Javascript sense
 	 */
 	public final native boolean isUndefined()/*-{
-		return typeof (this.datum) == undefined;
+		return typeof (this.datum) == "undefined";
 	}-*/;
 
 	public final native boolean isNull()/*-{
@@ -155,7 +160,8 @@ public class Value extends JavaScriptObject {
 	// public final native boolean isNumber()/*-{
 	// //return this.datum === string;
 	// var o = this.datum;
-	// return !isNaN(o - 0) && o !== null && o !== "" && o !== false && o !== true;
+	// return !isNaN(o - 0) && o !== null && o !== "" && o !== false && o !==
+	// true;
 	// }-*/;
 
 	public final native boolean isFunction()/*-{

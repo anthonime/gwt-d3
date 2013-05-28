@@ -3,13 +3,20 @@
  */
 package org.gwtd3.api;
 
+import java.util.Collection;
+
+import org.gwtd3.api.arrays.Array;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayInteger;
 import com.google.gwt.core.client.JsArrayMixed;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.core.client.JsArrayUtils;
 
 /**
+ * Convient methods to complete the methods of {@link JsArrayUtils}.
+ * 
  * @author <a href="mailto:schiochetanthoni@gmail.com">Anthony Schiochet</a>
  * 
  */
@@ -42,6 +49,36 @@ public class JsArrays {
     public static native <T> JsArrayMixed asJsArray(T a1, T a2, T a3) /*-{
 		return [ a1, a2, a3 ];
     }-*/;
+
+    /**
+     * @param data
+     * @return
+     */
+    public static <T> Array<T> asJsArray(final T[] array) {
+        if (GWT.isScript()) {
+            return arrayAsJsArrayForProdMode(array).cast();
+        }
+        Array<T> dest = JavaScriptObject.createArray().cast();
+        for (int i = 0; i < array.length; ++i) {
+            dest.push(array[i]);
+        }
+        return dest;
+    }
+
+    /**
+     * @param data
+     * @return
+     */
+    public static <T> Array<T> asJsArray(final Collection<T> iterable) {
+        if (GWT.isScript()) {
+            return arrayAsJsArrayForProdMode(iterable.toArray()).cast();
+        }
+        Array<T> dest = JavaScriptObject.createArray().cast();
+        for (T t : iterable) {
+            dest.push(t);
+        }
+        return dest;
+    }
 
     public static native JsArrayInteger asJsArray(int a1) /*-{
 		return [ a1 ];

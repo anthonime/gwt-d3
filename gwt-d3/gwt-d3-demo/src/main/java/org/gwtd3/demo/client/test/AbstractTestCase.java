@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  */
 public abstract class AbstractTestCase extends Assert implements TestCase {
-    protected ComplexPanel sandbox;
+	protected ComplexPanel sandbox;
 
 	@SuppressWarnings("unchecked")
 	public <T extends Widget> T getWidget(final int index) {
@@ -30,34 +30,37 @@ public abstract class AbstractTestCase extends Assert implements TestCase {
 		return getElement(index).getAttribute(attribute);
 	}
 
-	
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.gwtd3.demo.client.tests.UnitTest#tearDown(com.google.gwt.user.client
-     * .ui .RootPanel)
-     */
-    @Override
-    public void tearDown(final ComplexPanel sandbox) {
-        clearSandbox();
-    }
+	public String getElementClassAttribute(final int index) {
+		return getElement(index).getClassName();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gwtd3.demo.client.tests.UnitTest#tearDown(com.google.gwt.user.client
+	 * .ui .RootPanel)
+	 */
+	@Override
+	public void tearDown(final ComplexPanel sandbox) {
+		clearSandbox();
+	}
 
 	protected void clearSandbox() {
 		sandbox.clear();
 		sandbox.getElement().setInnerHTML("");
 	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.gwtd3.demo.client.tests.UnitTest#setUp(com.google.gwt.user.client
-     * .ui.RootPanel )
-     */
-    @Override
-    public void setUp(final ComplexPanel sandbox) {
-        this.sandbox = sandbox;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.gwtd3.demo.client.tests.UnitTest#setUp(com.google.gwt.user.client
+	 * .ui.RootPanel )
+	 */
+	@Override
+	public void setUp(final ComplexPanel sandbox) {
+		this.sandbox = sandbox;
 
-    }
+	}
 }

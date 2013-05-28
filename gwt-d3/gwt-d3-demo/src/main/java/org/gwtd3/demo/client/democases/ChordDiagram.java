@@ -60,7 +60,7 @@ public class ChordDiagram extends FlowPanel implements DemoCase {
 		double innerRadius = Math.min(width, height) * .41;
 		final double outerRadius = innerRadius * 1.1;
 
-		final OrdinalScale fill = D3.scale().ordinal()
+		final OrdinalScale fill = D3.scale.ordinal()
 				.domain(D3.range(4))
 				.range(JsArrays.asJsArray("#000000", "#FFDD89", "#957244", "#F26223"));
 
@@ -86,22 +86,22 @@ public class ChordDiagram extends FlowPanel implements DemoCase {
 				.on("mouseover", fade(css, svg, .1))
 				.on("mouseout", fade(css, svg, 1));
 
-		// Returns an array of tick angles and labels, given a group.
-		DatumFunction<Array<GroupTick>> groupTicks = new DatumFunction<Array<GroupTick>>() {
-			@Override
-			public Array<GroupTick> apply(final Element context, final Datum d, final int index) {
-				final Group g = d.<Group> as();
-				final double k = (g.endAngle() - g.startAngle()) / g.value();
-				return D3.range(0, g.value(), 1000).<Array<Double>> cast().map(new ForEachCallback<GroupTick>() {
-					@Override
-					public GroupTick forEach(final Object thisArg, final Value v, final int index, final Array<Value> array) {
-						double angle = (v.asDouble() * k) + g.startAngle();
-						String label = (index % 5) != 0 ? null : (v.asDouble() / 1000) + "k";
-						return GroupTick.create(angle, label);
-					}
-				});
-			}
-		};
+        // Returns an array of tick angles and labels, given a group.
+        DatumFunction<Array<GroupTick>> groupTicks = new DatumFunction<Array<GroupTick>>() {
+            @Override
+            public Array<GroupTick> apply(final Element context, final Datum d, final int index) {
+                final Group g = d.<Group> as();
+                final double k = (g.endAngle() - g.startAngle()) / g.value();
+                return D3.range(0, g.value(), 1000).<Array<Double>> cast().map(new ForEachCallback<GroupTick>() {
+                    @Override
+                    public GroupTick forEach(final Object thisArg, final Value v, final int index, final Array<?> array) {
+                        double angle = (v.asDouble() * k) + g.startAngle();
+                        String label = (index % 5) != 0 ? null : (v.asDouble() / 1000) + "k";
+                        return GroupTick.create(angle, label);
+                    }
+                });
+            }
+        };
 
 		Selection ticks = svg.append("g").selectAll("g")
 				.data(chord.groups())
@@ -170,23 +170,25 @@ public class ChordDiagram extends FlowPanel implements DemoCase {
 		f();
 	}-*/;
 
-	private DatumFunction<Void> fade(final MyResources css, final Selection svg, final double opacity) {
-		return new DatumFunction<Void>() {
-			@Override
-			public Void apply(final Element context, final Datum d, final int i) {
-				svg.selectAll("." + css.chord() + " path").<Array<Chord>> cast()
-						.filter(new ForEachCallback<Boolean>() {
-							@Override
-							public Boolean forEach(Object thisArg, Value v, int index, Array<Value> array) {
-								return (v.as(Chord.class).source().index() != i) && (v.as(Chord.class).target().index() != i);
-							}
-						}).<Selection> cast()
-						.transition()
-						.style("opacity", opacity);
-				return null;
-			}
-		};
-	}
+    private DatumFunction<Void> fade(final MyResources css, final Selection svg, final double opacity) {
+        return new DatumFunction<Void>() {
+            @Override
+            public Void apply(final Element context, final Datum d, final int i) {
+                svg.selectAll("." + css.chord() + " path").<Array<Chord>> cast()
+                        .filter(new ForEachCallback<Boolean>() {
+                            @Override
+                            public Boolean forEach(final Object thisArg, final Value v, final int index,
+                                    final Array<?> array) {
+                                return (v.as(Chord.class).source().index() != i)
+                                        && (v.as(Chord.class).target().index() != i);
+                            }
+                        }).<Selection> cast()
+                        .transition()
+                        .style("opacity", opacity);
+                return null;
+            }
+        };
+    }
 
 	@Override
 	public void stop() {
