@@ -9,10 +9,10 @@ import org.gwtd3.demo.client.democases.FocusAndContext;
 import org.gwtd3.demo.client.democases.GeneralUpdatePattern1;
 import org.gwtd3.demo.client.democases.GeneralUpdatePattern2;
 import org.gwtd3.demo.client.democases.GeneralUpdatePattern3;
+import org.gwtd3.demo.client.democases.LineChartDemo;
 import org.gwtd3.demo.client.democases.StupidExample;
 import org.gwtd3.demo.client.democases.StupidExample2;
 import org.gwtd3.demo.client.democases.arcs.ArcDemo;
-
 import org.gwtd3.demo.client.democases.behaviors.DragMultiples;
 import org.gwtd3.demo.client.test.ui.TestRunner;
 import org.gwtd3.demo.client.test.ui.TestSessionContainer;
@@ -39,6 +39,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class D3Demo implements EntryPoint {
 
+	public static final String DEMO_CONTAINER_ID = "demoContainer";
 	private ComplexPanel demoContainer;
 	private DemoCase currentDemo;
 	private TestSessionContainer testContainer;
@@ -77,12 +78,14 @@ public class D3Demo implements EntryPoint {
 		buttonContainer.add(new DemoButton("Focus and context", FocusAndContext.factory()));
 		buttonContainer.add(new DemoButton("Bar chart", BarChart.factory()));
 		buttonContainer.add(new DemoButton("Chord diagram", ChordDiagram.factory()));
+		buttonContainer.add(new DemoButton("Line chart", LineChartDemo.factory()));
 
 		buttonContainer.add(new DemoButton("Drag Multiples", DragMultiples.factory()));
 		p.add(buttonContainer);
 		container.addWest(p, 200);
 
 		demoContainer = new FlowPanel();
+		demoContainer.ensureDebugId(DEMO_CONTAINER_ID);
 		demoContainer.setSize("100%", "100%");
 		container.add(demoContainer);
 
@@ -95,6 +98,7 @@ public class D3Demo implements EntryPoint {
 
 		public DemoButton(final String title, final Factory demoClass) {
 			super(title, new DemoClickHandler(demoClass));
+			ensureDebugId(demoClass.id());
 		}
 
 	}

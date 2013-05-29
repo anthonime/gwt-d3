@@ -74,6 +74,7 @@ public class Conditions {
 	public static Predicate<List<WebElement>> toPredicate(
 			ExpectedCondition<List<WebElement>> condition) {
 		return new Predicate<List<WebElement>>() {
+			@Override
 			public boolean apply(List<WebElement> input) {
 				return input != null;
 			}

@@ -1,6 +1,16 @@
 package org.gwtd3.demo.client;
 
-public interface Factory {
+public abstract class Factory {
 
-    DemoCase newInstance();
+	public abstract DemoCase newInstance();
+
+	public String id() {
+		String name = this.getClass().getName();
+		name = name.substring(name.lastIndexOf('.') + 1);
+		// inner class
+		if (name.contains("$")) {
+			name = name.substring(0, name.lastIndexOf("$"));
+		}
+		return name;
+	}
 }

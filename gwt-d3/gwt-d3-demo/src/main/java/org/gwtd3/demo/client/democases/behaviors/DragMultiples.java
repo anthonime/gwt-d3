@@ -5,6 +5,7 @@ import org.gwtd3.api.D3;
 import org.gwtd3.api.arrays.Array;
 import org.gwtd3.api.arrays.ForEachCallback;
 import org.gwtd3.api.behaviour.Drag;
+import org.gwtd3.api.behaviour.Drag.DragEventType;
 import org.gwtd3.api.core.Datum;
 import org.gwtd3.api.core.Selection;
 import org.gwtd3.api.core.Value;
@@ -26,9 +27,9 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 		init();
 	}
 
-	private final int width = 238,
-			height = 123,
-			radius = 20;
+	public static final int SQUARE_WIDTH = 238,
+			SQUARE_HEIGHT = 123,
+			CIRCLE_RADIUS = 20;
 
 	/**
 	 * 
@@ -39,26 +40,27 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 				// the origin will be set with the data of svg
 				// on mousedown
 				.origin(D3.identity())
-				.on(Drag.DragEventType.drag, new OnDragMove());
-
+				.on(Drag.DragEventType.drag, new OnDragMove())
+				.on(DragEventType.dragstart, new OnDragStart())
+				.on(DragEventType.dragend, new OnDragEnd());
 		Selection svg = D3.select(this).selectAll("svg")
 				// set the data as the center of the squares
 				.data(D3.range(16).map(
 						new ForEachCallback<Coords>() {
 							@Override
 							public Coords forEach(final Object thisArg, final Value element, final int index, final Array<?> array) {
-								return Coords.create(width / 2, height / 2);
+								return Coords.create(SQUARE_WIDTH / 2, SQUARE_HEIGHT / 2);
 							}
 						})
 				)
 				.enter().append("svg")
-				.attr("width", width)
-				.attr("height", height)
+				.attr("width", SQUARE_WIDTH)
+				.attr("height", SQUARE_HEIGHT)
 				.style("float", "left")
 				.style("border", "solid 1px #aaa");
 
 		svg.append("circle")
-				.attr("r", radius)
+				.attr("r", CIRCLE_RADIUS)
 				.attr("cx", new DatumFunction<Double>() {
 					@Override
 					public Double apply(final Element context, final Datum d, final int index) {
@@ -80,11 +82,13 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 	private class OnDragMove implements DatumFunction<Void> {
 		@Override
 		public Void apply(final Element context, final Datum d, final int index) {
+			// change color of the element being dragged
+			D3.select(context).attr("fill", "green");
 			Coords datum = d.as();
 			// compute the new x and y using the mouse position
 			// note: the mouse position has been adjusted to the drag 'origin'
-			double newX = Math.max(radius, Math.min(width - radius, D3.eventAsCoords().x()));
-			double newY = Math.max(radius, Math.min(height - radius, D3.eventAsCoords().y()));
+			double newX = Math.max(CIRCLE_RADIUS, Math.min(SQUARE_WIDTH - CIRCLE_RADIUS, D3.eventAsCoords().x()));
+			double newY = Math.max(CIRCLE_RADIUS, Math.min(SQUARE_HEIGHT - CIRCLE_RADIUS, D3.eventAsCoords().y()));
 			// update the datum itself, to adjust the origin
 			datum.x(newX).y(newY);
 			// update the position of the circle
@@ -93,6 +97,27 @@ public class DragMultiples extends FlowPanel implements DemoCase {
 					.attr("cy", datum.y());
 			return null;
 		}
+	}
+
+	public class OnDragEnd implements DatumFunction<Void> {
+
+		@Override
+		public Void apply(Element context, Datum d, int index) {
+			// remove fill attributes
+			D3.select(context).attr("fill", "");
+			return null;
+		}
+
+	}
+
+	public class OnDragStart implements DatumFunction<Void> {
+
+		@Override
+		public Void apply(Element context, Datum d, int index) {
+			D3.select(context).attr("fill", "red");
+			return null;
+		}
+
 	}
 
 	/*
