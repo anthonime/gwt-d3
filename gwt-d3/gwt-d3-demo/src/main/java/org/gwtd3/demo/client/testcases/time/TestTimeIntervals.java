@@ -26,14 +26,14 @@ public class TestTimeIntervals extends AbstractTestCase {
 		testInterval(MINUTE, D3.time().minute());
 		testInterval(HOUR, D3.time().hour());
 		// testIntervalDay(DAY, D3.time().day());
-		testInterval(WEEK, D3.time().week());
-		testInterval(WEEK, D3.time().sunday());
-		testInterval(WEEK, D3.time().monday());
-		testInterval(WEEK, D3.time().tueday());
-		testInterval(WEEK, D3.time().wednesday());
-		testInterval(WEEK, D3.time().thursday());
-		testInterval(WEEK, D3.time().friday());
-		testInterval(WEEK, D3.time().saturday());
+		// testInterval(WEEK, D3.time().week());
+		// testInterval(WEEK, D3.time().sunday());
+		// testInterval(WEEK, D3.time().monday());
+		// testInterval(WEEK, D3.time().tueday());
+		// testInterval(WEEK, D3.time().wednesday());
+		// testInterval(WEEK, D3.time().thursday());
+		// testInterval(WEEK, D3.time().friday());
+		// testInterval(WEEK, D3.time().saturday());
 		// testInterval(MONTH, D3.time().month());
 		// testInterval(YEAR, D3.time().year());
 	}
