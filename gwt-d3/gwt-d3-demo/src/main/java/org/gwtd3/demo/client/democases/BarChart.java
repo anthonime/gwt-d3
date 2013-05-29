@@ -106,7 +106,6 @@ public class BarChart extends FlowPanel implements DemoCase {
                             @Override
                             public double forEach(final Object thisArg, final Value element, final int index,
                                     final Array<?> array) {
-                                System.out.println(element.as(Data.class).getFrequency());
                                 return element.as(Data.class).getFrequency();
                             }
                         }).asDouble()));
