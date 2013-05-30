@@ -10,12 +10,15 @@
 	<modules>
 		<module>gwt-d3-api</module>
 		<module>gwt-d3-demo</module>
+		<module>gwt-d3-ui</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gwt.version>2.5.1</gwt.version>
 		<java.version>1.6</java.version>
+		<junit.version>4.11</junit.version>
+		<guava.version>14.0.1</guava.version>
 	</properties>
 
 <!-- this is for the release plugin -->
