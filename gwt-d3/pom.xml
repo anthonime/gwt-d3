@@ -74,4 +74,18 @@
 			<url>dav:https://repository-anthonime.forge.cloudbees.com/release/</url>
 		</repository>
 	</distributionManagement>
+	
+	<repositories>
+		<repository>
+			<id>cloudbees-ericcitaire-release</id>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<name>CloudBees Release Repository (for gwt-d3js)</name>
+			<url>http://repository-ericcitaire.forge.cloudbees.com/release/</url>
+		</repository>
+	</repositories>
 </project>
