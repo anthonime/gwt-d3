@@ -28,9 +28,6 @@
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
-	<!-- use Maven filter resources to change the deps to reduced code on prod time -->
-	<!-- <script src="http://d3js.org/d3.v3.min.js"/> -->
-	<script src="http://d3js.org/d3.v3.js" />
 	
 <!-- 	<set-property name="user.agent" value="ie9" /> -->
 
